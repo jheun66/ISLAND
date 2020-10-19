@@ -116,11 +116,19 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>Framework.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -139,20 +147,57 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="ISLAND.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="MyFramework\Buffer\ConstBuffer.h" />
+    <ClInclude Include="MyFramework\Buffer\IndexBuffer.h" />
+    <ClInclude Include="MyFramework\Buffer\VertexBuffer.h" />
+    <ClInclude Include="MyFramework\Device\Device.h" />
+    <ClInclude Include="MyFramework\Shader\ComputeShader.h" />
+    <ClInclude Include="MyFramework\Shader\GeometryShader.h" />
+    <ClInclude Include="MyFramework\Shader\Shader.h" />
+    <ClInclude Include="MyFramework\Shader\PixelShader.h" />
+    <ClInclude Include="MyFramework\Shader\VertexShader.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Windows\Window.h" />
+    <ClInclude Include="Windows\WindowsMessageMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISLAND.cpp" />
+    <ClCompile Include="Framework.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MyFramework\Buffer\ConstBuffer.cpp" />
+    <ClCompile Include="MyFramework\Buffer\IndexBuffer.cpp" />
+    <ClCompile Include="MyFramework\Buffer\VertexBuffer.cpp" />
+    <ClCompile Include="MyFramework\Device\Device.cpp" />
+    <ClCompile Include="MyFramework\Shader\ComputeShader.cpp" />
+    <ClCompile Include="MyFramework\Shader\GeometryShader.cpp" />
+    <ClCompile Include="MyFramework\Shader\Shader.cpp" />
+    <ClCompile Include="MyFramework\Shader\PixelShader.cpp" />
+    <ClCompile Include="MyFramework\Shader\VertexShader.cpp" />
+    <ClCompile Include="Windows\Window.cpp" />
+    <ClCompile Include="Windows\WindowsMessageMap.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ISLAND.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ISLAND.ico" />
+    <Image Include="ISLAND_ICON.ico" />
+    <Image Include="ISLAND_ICON2.ico" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shaders\SampleShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
