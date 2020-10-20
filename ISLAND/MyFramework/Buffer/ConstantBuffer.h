@@ -1,6 +1,6 @@
 #pragma once
 
-class ConstBuffer
+class ConstantBuffer
 {
 private:
 	ID3D11Buffer* buffer;
@@ -9,8 +9,8 @@ private:
 	UINT dataSize;
 
 protected:
-	ConstBuffer(void* data, UINT dataSize);
-	virtual ~ConstBuffer();
+	ConstantBuffer(void* data, UINT dataSize);
+	virtual ~ConstantBuffer();
 
 	void MapData();
 

@@ -24,12 +24,6 @@
     <ClInclude Include="Framework.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MyFramework\Device\Device.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Scene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="MyFramework\Shader\PixelShader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -51,13 +45,37 @@
     <ClInclude Include="MyFramework\Buffer\IndexBuffer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MyFramework\Buffer\ConstBuffer.h">
+    <ClInclude Include="MyFramework\System\Window.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Windows\WindowsMessageMap.h">
+    <ClInclude Include="MyFramework\System\WindowsMessageMap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Windows\Window.h">
+    <ClInclude Include="MyFramework\System\Graphics.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\TMI\Remark.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Program.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Scene\Scene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\System\Environment.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\Buffer\GlobalBuffer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\Buffer\ConstantBuffer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Scene\CubeScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Cube.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -66,9 +84,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Framework.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MyFramework\Device\Device.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MyFramework\Shader\PixelShader.cpp">
@@ -92,13 +107,28 @@
     <ClCompile Include="MyFramework\Buffer\IndexBuffer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="MyFramework\Buffer\ConstBuffer.cpp">
+    <ClCompile Include="MyFramework\System\Window.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Windows\WindowsMessageMap.cpp">
+    <ClCompile Include="MyFramework\System\WindowsMessageMap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Windows\Window.cpp">
+    <ClCompile Include="MyFramework\System\Graphics.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Program.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\System\Environment.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\Buffer\ConstantBuffer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Cube.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Scene\CubeScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -123,5 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\SampleShader.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexColor.hlsl" />
+    <FxCompile Include="Shaders\PixelShaders\PixelColor.hlsl" />
   </ItemGroup>
 </Project>

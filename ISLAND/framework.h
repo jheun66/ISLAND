@@ -21,14 +21,12 @@
 #define V(hr) assert(SUCCEEDED(hr))
 #endif
 
-#define DEVICE Device::Get()->GetDevice()
-#define DC Device::Get()->GetDeviceContext()
+#define DEVICE Graphics::Get()->GetDevice()
+#define DC Graphics::Get()->GetDeviceContext()
 
 
 // Windows 헤더 파일
 #include <windows.h>
-
-#include "Windows/Window.h"
 
 // 자주 쓰는 헤더 파일
 #include <assert.h>
@@ -47,17 +45,31 @@
 // TODO : 나중에 추가하기
 
 // 프로젝트 속성 - 링커 - 입력 - 추가 종속성에서 추가해 줘도 된다.
+#pragma comment(lib,"dxgi.lib")
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 // interface id 있는 라이브러리 
 #pragma comment(lib, "dxguid.lib")
+
+
+// ImGui
+#include "../ImGui/imgui.h"
+#include "../ImGui/imgui_impl_dx11.h"
+#include "../ImGui/imgui_impl_win32.h"
+
 
 // 자주 사용하는 namespace
 using namespace DirectX;
 using namespace std;
 
 // Framework
-#include "MyFramework/Device/Device.h"
+
+// System 관련
+#include "MyFramework/System/Window.h"
+#include "MyFramework/System/Graphics.h"
+#include "MyFramework/System/Environment.h"
+
+
 #include "MyFramework/Shader/Shader.h"
 
 #include "MyFramework/Shader/VertexShader.h"
@@ -67,14 +79,17 @@ using namespace std;
 
 #include "MyFramework/Buffer/VertexBuffer.h"
 #include "MyFramework/Buffer/IndexBuffer.h"
-#include "MyFramework/Buffer/ConstBuffer.h"
+#include "MyFramework/Buffer/ConstantBuffer.h"
+#include "MyFramework/Buffer/GlobalBuffer.h"
 
-
-// Basic Object
 
 // Game Object
+#include "GameObject/Cube.h"
 
 
+// Program Header
+#include "Program/Scene/Scene.h"
+#include "Program/Program.h"
 
 
 // 일단 주석하기
@@ -82,4 +97,6 @@ using namespace std;
 //#include <stdlib.h>
 //#include <malloc.h>
 //#include <memory.h>
+
+extern HWND hWnd;
 

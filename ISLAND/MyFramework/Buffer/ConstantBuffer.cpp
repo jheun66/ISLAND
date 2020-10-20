@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-ConstBuffer::ConstBuffer(void* data, UINT dataSize)
+ConstantBuffer::ConstantBuffer(void* data, UINT dataSize)
     : data(data), dataSize(dataSize)
 {
     D3D11_BUFFER_DESC bd = {};
@@ -12,12 +12,12 @@ ConstBuffer::ConstBuffer(void* data, UINT dataSize)
     V(DEVICE->CreateBuffer(&bd, nullptr, &buffer));
 }
 
-ConstBuffer::~ConstBuffer()
+ConstantBuffer::~ConstantBuffer()
 {
     buffer->Release();
 }
 
-void ConstBuffer::MapData()
+void ConstantBuffer::MapData()
 {
     D3D11_MAPPED_SUBRESOURCE subResource;
 
@@ -26,13 +26,13 @@ void ConstBuffer::MapData()
     DC->Unmap(buffer, 0);
 }
 
-void ConstBuffer::SetVSBuffer(UINT slot)
+void ConstantBuffer::SetVSBuffer(UINT slot)
 {
     MapData();
     DC->VSSetConstantBuffers(slot, 1, &buffer);
 }
 
-void ConstBuffer::SetPSBuffer(UINT slot)
+void ConstantBuffer::SetPSBuffer(UINT slot)
 {
     MapData();
     DC->PSSetConstantBuffers(slot, 1, &buffer);

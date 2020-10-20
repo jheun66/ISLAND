@@ -1,6 +1,9 @@
 #include "Framework.h"
 
+// 전역 변수로 선언해둠
+HWND hWnd;
 // Inner Class
+
 Window::WindowClass Window::WindowClass::wndClass;
 
 Window::WindowClass::WindowClass() noexcept
@@ -103,15 +106,40 @@ LRESULT WINAPI Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM
 	return pWnd->HandleMsg(hWnd, msg, wParam, lParam);
 }
 
+// ImGui WndProc(message 처리) 전방선언 
+IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 // 기존 WndProc
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
     // 필요한 윈도우 메시지 찾고 싶으면 
     // https://wiki.winehq.org/List_Of_Windows_Messages
 
+	// ImGui 메시지 처리
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+		return true;
+
+
 	switch (msg)
 	{
+	case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hWnd, &ps);
+
+            EndPaint(hWnd, &ps);
+        }
+        break;
+    case WM_GETMINMAXINFO:
+        //화면 크기 제어
+        ((MINMAXINFO*)lParam)->ptMaxTrackSize.x = WIN_WIDTH;
+        ((MINMAXINFO*)lParam)->ptMaxTrackSize.y = WIN_HEIGHT;
+        ((MINMAXINFO*)lParam)->ptMinTrackSize.x = WIN_WIDTH;
+        ((MINMAXINFO*)lParam)->ptMinTrackSize.y = WIN_HEIGHT;
+        break;
+
 	case WM_CLOSE:
+	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
 	}

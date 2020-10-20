@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ISLAND", "ISLAND\ISLAND.vcxproj", "{1A2A6992-E530-4221-867E-BA1EDE573240}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F837907C-520B-4E26-8353-453DDC2F6732} = {F837907C-520B-4E26-8353-453DDC2F6732}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGui", "ImGui\ImGui.vcxproj", "{F837907C-520B-4E26-8353-453DDC2F6732}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,14 @@ Global
 		{1A2A6992-E530-4221-867E-BA1EDE573240}.Release|x64.Build.0 = Release|x64
 		{1A2A6992-E530-4221-867E-BA1EDE573240}.Release|x86.ActiveCfg = Release|Win32
 		{1A2A6992-E530-4221-867E-BA1EDE573240}.Release|x86.Build.0 = Release|Win32
+		{F837907C-520B-4E26-8353-453DDC2F6732}.Debug|x64.ActiveCfg = Debug|x64
+		{F837907C-520B-4E26-8353-453DDC2F6732}.Debug|x64.Build.0 = Debug|x64
+		{F837907C-520B-4E26-8353-453DDC2F6732}.Debug|x86.ActiveCfg = Debug|Win32
+		{F837907C-520B-4E26-8353-453DDC2F6732}.Debug|x86.Build.0 = Debug|Win32
+		{F837907C-520B-4E26-8353-453DDC2F6732}.Release|x64.ActiveCfg = Release|x64
+		{F837907C-520B-4E26-8353-453DDC2F6732}.Release|x64.Build.0 = Release|x64
+		{F837907C-520B-4E26-8353-453DDC2F6732}.Release|x86.ActiveCfg = Release|Win32
+		{F837907C-520B-4E26-8353-453DDC2F6732}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
