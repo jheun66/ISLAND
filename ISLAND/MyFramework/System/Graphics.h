@@ -91,6 +91,9 @@ public:
 	// 화면에 출력
 	void Present();
 
+	// 수직 동기화 체크
+	void GUI();
+
 	ID3D11Device* GetDevice() { return device; }
 	ID3D11DeviceContext* GetDeviceContext() { return deviceContext; }
 
