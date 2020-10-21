@@ -18,4 +18,6 @@ public:
 	// shader 마다 만들어 줘야함
 	void SetVSBuffer(UINT slot);
 	void SetPSBuffer(UINT slot);
+	void SetCSBuffer(UINT slot);
+	void SetGSBuffer(UINT slot);
 };

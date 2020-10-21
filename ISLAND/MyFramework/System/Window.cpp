@@ -130,14 +130,15 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
             EndPaint(hWnd, &ps);
         }
         break;
-    case WM_GETMINMAXINFO:
-        //화면 크기 제어
-        ((MINMAXINFO*)lParam)->ptMaxTrackSize.x = WIN_WIDTH;
-        ((MINMAXINFO*)lParam)->ptMaxTrackSize.y = WIN_HEIGHT;
-        ((MINMAXINFO*)lParam)->ptMinTrackSize.x = WIN_WIDTH;
-        ((MINMAXINFO*)lParam)->ptMinTrackSize.y = WIN_HEIGHT;
-        break;
-
+	case WM_MOUSEMOVE:
+		Control::Get()->SetMouse(lParam);
+		break;
+	case WM_MOUSEWHEEL:
+		{
+			short value = (short)HIWORD(wParam);
+			Control::Get()->SetWheel((float)value);
+		}
+		break;
 	case WM_CLOSE:
 	case WM_DESTROY:
 		PostQuitMessage(0);

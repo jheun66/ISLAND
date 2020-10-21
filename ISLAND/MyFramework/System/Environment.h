@@ -5,9 +5,15 @@ class MatrixBuffer;
 class Environment
 {
 private:
-	// 나중에 카메라로 분리 할꺼
-	MatrixBuffer* viewBuffer;
+	XMMATRIX projection;
 	MatrixBuffer* projectionBuffer;
+	//LightBuffer* lightBuffer;
+
+	Camera* mainCamera;
+
+	//SamplerState* samplerState;
+
+	D3D11_VIEWPORT viewport;
 
 	static Environment* instance;
 	Environment();
@@ -17,11 +23,18 @@ public:
 	static void Create() { instance = new Environment(); }
 	static void Delete() { delete instance; }
 
-	MatrixBuffer* GetView() { return viewBuffer; }
-	MatrixBuffer* GetProjection() { return projectionBuffer; }
+	Camera* MainCamera() { return mainCamera; }
+	MatrixBuffer* GetProjectionBuffer() { return projectionBuffer; }
+	//LightBuffer* GetLight() { return lightBuffer; }
+	XMMATRIX GetProjection() { return projection; }
 
+	void ChangeCameraMode(bool isFollowCamera);
+
+	void SetViewport(UINT width = WIN_WIDTH, UINT height = WIN_HEIGHT);
+
+	void PostRender();
 private:
 	void CreateViewort();
 	void CreatePerspective();
-
+	//void CreateSamplerState();
 };

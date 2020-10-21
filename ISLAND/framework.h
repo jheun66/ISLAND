@@ -24,6 +24,15 @@
 #define DEVICE Graphics::Get()->GetDevice()
 #define DC Graphics::Get()->GetDeviceContext()
 
+#define KEY_DOWN(k) Control::Get()->Down(k)
+#define KEY_PRESS(k) Control::Get()->Press(k)
+#define KEY_UP(k) Control::Get()->Up(k)
+
+#define MOUSEPOS Control::Get()->GetMouse()
+
+#define DELTA Timer::Get()->Delta()
+
+#define CAMERA Environment::Get()->MainCamera()
 
 // Windows 헤더 파일
 #include <windows.h>
@@ -57,6 +66,8 @@
 #include "../ImGui/imgui_impl_dx11.h"
 #include "../ImGui/imgui_impl_win32.h"
 
+// DirectXTex
+#include "../DirectXTex/DirectXTex.h"
 
 // 자주 사용하는 namespace
 using namespace DirectX;
@@ -65,8 +76,19 @@ using namespace std;
 // Framework
 
 // System 관련
+#include "MyFramework/Math/Math.h"
+#include "MyFramework/Math/Vector3.h"
+#include "MyFramework/Math/Transform.h"
+
 #include "MyFramework/System/Window.h"
 #include "MyFramework/System/Graphics.h"
+#include "MyFramework/System/Timer.h"
+#include "MyFramework/System/Control/Control.h"
+
+#include "MyFramework/System/Camera/Camera.h"
+#include "MyFramework/System/Camera/FreeCamera.h"
+#include "MyFramework/System/Camera/FollowCamera.h"
+
 #include "MyFramework/System/Environment.h"
 
 

@@ -153,6 +153,13 @@
     <ClInclude Include="MyFramework\Buffer\GlobalBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\IndexBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\VertexBuffer.h" />
+    <ClInclude Include="MyFramework\Math\Math.h" />
+    <ClInclude Include="MyFramework\Math\Transform.h" />
+    <ClInclude Include="MyFramework\Math\Vector3.h" />
+    <ClInclude Include="MyFramework\System\Camera\Camera.h" />
+    <ClInclude Include="MyFramework\System\Camera\FollowCamera.h" />
+    <ClInclude Include="MyFramework\System\Camera\FreeCamera.h" />
+    <ClInclude Include="MyFramework\System\Control\Control.h" />
     <ClInclude Include="MyFramework\System\Environment.h" />
     <ClInclude Include="MyFramework\System\Graphics.h" />
     <ClInclude Include="MyFramework\Shader\ComputeShader.h" />
@@ -160,6 +167,7 @@
     <ClInclude Include="MyFramework\Shader\Shader.h" />
     <ClInclude Include="MyFramework\Shader\PixelShader.h" />
     <ClInclude Include="MyFramework\Shader\VertexShader.h" />
+    <ClInclude Include="MyFramework\System\Timer.h" />
     <ClInclude Include="MyFramework\TMI\Remark.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Program\Scene\CubeScene.h" />
@@ -178,6 +186,13 @@
     <ClCompile Include="MyFramework\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="MyFramework\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="MyFramework\Buffer\VertexBuffer.cpp" />
+    <ClCompile Include="MyFramework\Math\Math.cpp" />
+    <ClCompile Include="MyFramework\Math\Transform.cpp" />
+    <ClCompile Include="MyFramework\Math\Vector3.cpp" />
+    <ClCompile Include="MyFramework\System\Camera\Camera.cpp" />
+    <ClCompile Include="MyFramework\System\Camera\FollowCamera.cpp" />
+    <ClCompile Include="MyFramework\System\Camera\FreeCamera.cpp" />
+    <ClCompile Include="MyFramework\System\Control\Control.cpp" />
     <ClCompile Include="MyFramework\System\Environment.cpp" />
     <ClCompile Include="MyFramework\System\Graphics.cpp" />
     <ClCompile Include="MyFramework\Shader\ComputeShader.cpp" />
@@ -185,6 +200,7 @@
     <ClCompile Include="MyFramework\Shader\Shader.cpp" />
     <ClCompile Include="MyFramework\Shader\PixelShader.cpp" />
     <ClCompile Include="MyFramework\Shader\VertexShader.cpp" />
+    <ClCompile Include="MyFramework\System\Timer.cpp" />
     <ClCompile Include="MyFramework\System\Window.cpp" />
     <ClCompile Include="MyFramework\System\WindowsMessageMap.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -222,6 +238,9 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DirectXTex\DirectXTex_Desktop_2019_Win10.vcxproj">
+      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\ImGui\ImGui.vcxproj">
       <Project>{f837907c-520b-4e26-8353-453ddc2f6732}</Project>
     </ProjectReference>

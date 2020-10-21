@@ -6,12 +6,40 @@ Environment::Environment()
 {
     CreateViewort();
     CreatePerspective();
+    //CreateSamplerState();
+
+    mainCamera = new FreeCamera();
 }
 
 Environment::~Environment()
 {
-    delete viewBuffer;
     delete projectionBuffer;
+
+
+    delete mainCamera;
+}
+
+void Environment::ChangeCameraMode(bool isFollowCamera)
+{
+    delete mainCamera;
+
+    if (isFollowCamera)
+        mainCamera = new FollowCamera();
+    else
+        mainCamera = new FreeCamera();
+}
+
+void Environment::SetViewport(UINT width, UINT height)
+{
+    viewport.Width = width;
+    viewport.Height = height;
+
+    DC->RSSetViewports(1, &viewport);
+}
+
+void Environment::PostRender()
+{
+    mainCamera->PostRender();
 }
 
 void Environment::CreateViewort()
@@ -28,18 +56,9 @@ void Environment::CreateViewort()
 
 void Environment::CreatePerspective()
 {
-    viewBuffer = new MatrixBuffer();
     projectionBuffer = new MatrixBuffer();
 
-    XMVECTOR eye = XMVectorSet(3, 3, -3, 0);
-    XMVECTOR focus = XMVectorSet(0, 0, 0, 0);
-    XMVECTOR up = XMVectorSet(0, 1, 0, 0);
-
-    XMMATRIX view = XMMatrixLookAtLH(eye, focus, up);
-
-    viewBuffer->Set(view);
-
-    XMMATRIX projection = XMMatrixPerspectiveFovLH(XM_PIDIV2,
+    projection = XMMatrixPerspectiveFovLH(XM_PIDIV2,
         WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 1000.0f);
 
     projectionBuffer->Set(projection);

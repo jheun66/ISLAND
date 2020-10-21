@@ -1,13 +1,6 @@
 #pragma once
 
-/*
-DXGI 기본적인 역활
-그래픽카드 정보의 열거
-디스플레이 모드의 열거
-출력장치의 나열
-스왑체인 생성(더블 버퍼링)
-*/
-
+// TODO : 현재 수직동기화 안되는중 끝나면 체크하기
 
 class Graphics
 {
@@ -66,7 +59,7 @@ private:
 	int selectedAdapterIndex = 0;
 
 	// 수직 동기화 여부
-	bool bVsync = false;
+	bool bVsync = true;
 
 
 	static Graphics* instance;

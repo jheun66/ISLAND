@@ -25,9 +25,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ImGui_ImplWin32_Init(hWnd);
     ImGui_ImplDX11_Init(DEVICE, DC);
 
-    // Keyboard, Mouse
+    // Controller(키보드나 마우스처리)
+    Control::Create();
 
-    // Timer
+    Timer::Create();
 
     Environment::Create();
 
@@ -48,6 +49,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
+            Control::Get()->Update();
+            Timer::Get()->Update();
+
             // 내 프로그램 처리
             program->Update();
 
@@ -69,16 +73,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             Graphics::Get()->Present();
         }
     }
+    // 종료 처리
+    delete program;
 
     // ImGui Delete
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
 
-    // 종료 처리
-    delete program;
-
     Environment::Delete();
+    Timer::Delete();
+    Control::Delete();
+
     Graphics::Delete();
 
     return (int) msg.wParam;
