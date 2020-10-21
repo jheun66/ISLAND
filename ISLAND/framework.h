@@ -105,8 +105,14 @@ using namespace std;
 #include "MyFramework/Buffer/GlobalBuffer.h"
 
 
+#include "MyFramework/Render/Texture.h"
+#include "MyFramework/Render/Mesh.h"
+#include "MyFramework/Render/Material.h"
+
+
 // Game Object
-#include "GameObject/Cube.h"
+#include "GameObject/Basic/Cube.h"
+#include "GameObject/Basic/Quad.h"
 
 
 // Program Header

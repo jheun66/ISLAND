@@ -76,6 +76,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 종료 처리
     delete program;
 
+    // class의 static으로 잡은 것들 제거
+    Shader::Delete();
+    Texture::Delete();
+
     // ImGui Delete
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
@@ -84,7 +88,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     Environment::Delete();
     Timer::Delete();
     Control::Delete();
-
     Graphics::Delete();
 
     return (int) msg.wParam;

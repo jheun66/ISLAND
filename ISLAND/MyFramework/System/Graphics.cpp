@@ -59,8 +59,6 @@ void Graphics::CreateDevcieAndSwapChain()
     sd.Windowed = true;
     sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 
-    // TODO : 외장 그래픽 사용하도록 변경하기
-
     vector<D3D_FEATURE_LEVEL> featureLevel
     {// 기능 수준, 무슨 버전 쓸지
         D3D_FEATURE_LEVEL_11_1,

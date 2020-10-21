@@ -10,8 +10,6 @@ Program::Program()
 Program::~Program()
 {
 	delete scene;
-
-	Shader::Delete();
 }
 
 void Program::Update()

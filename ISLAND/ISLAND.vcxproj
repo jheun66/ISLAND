@@ -148,7 +148,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
-    <ClInclude Include="GameObject\Cube.h" />
+    <ClInclude Include="GameObject\Basic\Cube.h" />
+    <ClInclude Include="GameObject\Basic\Quad.h" />
     <ClInclude Include="MyFramework\Buffer\ConstantBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\GlobalBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\IndexBuffer.h" />
@@ -156,6 +157,9 @@
     <ClInclude Include="MyFramework\Math\Math.h" />
     <ClInclude Include="MyFramework\Math\Transform.h" />
     <ClInclude Include="MyFramework\Math\Vector3.h" />
+    <ClInclude Include="MyFramework\Render\Material.h" />
+    <ClInclude Include="MyFramework\Render\Mesh.h" />
+    <ClInclude Include="MyFramework\Render\Texture.h" />
     <ClInclude Include="MyFramework\System\Camera\Camera.h" />
     <ClInclude Include="MyFramework\System\Camera\FollowCamera.h" />
     <ClInclude Include="MyFramework\System\Camera\FreeCamera.h" />
@@ -167,10 +171,12 @@
     <ClInclude Include="MyFramework\Shader\Shader.h" />
     <ClInclude Include="MyFramework\Shader\PixelShader.h" />
     <ClInclude Include="MyFramework\Shader\VertexShader.h" />
+    <ClInclude Include="MyFramework\System\Light\Light.h" />
     <ClInclude Include="MyFramework\System\Timer.h" />
     <ClInclude Include="MyFramework\TMI\Remark.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Program\Scene\CubeScene.h" />
+    <ClInclude Include="Program\Scene\QuadScene.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Program\Scene\Scene.h" />
     <ClInclude Include="targetver.h" />
@@ -178,7 +184,7 @@
     <ClInclude Include="MyFramework\System\WindowsMessageMap.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameObject\Cube.cpp" />
+    <ClCompile Include="GameObject\Basic\Cube.cpp" />
     <ClCompile Include="ISLAND.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -189,6 +195,8 @@
     <ClCompile Include="MyFramework\Math\Math.cpp" />
     <ClCompile Include="MyFramework\Math\Transform.cpp" />
     <ClCompile Include="MyFramework\Math\Vector3.cpp" />
+    <ClCompile Include="MyFramework\Render\Mesh.cpp" />
+    <ClCompile Include="MyFramework\Render\Texture.cpp" />
     <ClCompile Include="MyFramework\System\Camera\Camera.cpp" />
     <ClCompile Include="MyFramework\System\Camera\FollowCamera.cpp" />
     <ClCompile Include="MyFramework\System\Camera\FreeCamera.cpp" />
@@ -207,6 +215,7 @@
     </ClCompile>
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Program\Scene\CubeScene.cpp" />
+    <ClCompile Include="Program\Scene\QuadScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ISLAND.rc" />

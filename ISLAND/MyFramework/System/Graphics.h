@@ -1,6 +1,7 @@
 #pragma once
 
 // TODO : 현재 수직동기화 안되는중 끝나면 체크하기
+// TODO : depthstencil rendertarget 클래스로 만들기 넣어주기
 
 class Graphics
 {
