@@ -8,6 +8,7 @@ private:
 	Material* material;
 
 	RasterizerState* rasterizerState[2];
+	BlendState* blendState[2];
 
 public:
 	Quad();

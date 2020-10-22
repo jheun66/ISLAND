@@ -161,12 +161,15 @@
     <ClInclude Include="MyFramework\Render\Mesh.h" />
     <ClInclude Include="MyFramework\Render\Texture.h" />
     <ClInclude Include="MyFramework\Render\VertexType.h" />
+    <ClInclude Include="MyFramework\State\BlendState.h" />
+    <ClInclude Include="MyFramework\State\DepthStencilState.h" />
     <ClInclude Include="MyFramework\State\RasterizerState.h" />
     <ClInclude Include="MyFramework\State\SamplerState.h" />
     <ClInclude Include="MyFramework\System\Camera\Camera.h" />
     <ClInclude Include="MyFramework\System\Camera\FollowCamera.h" />
     <ClInclude Include="MyFramework\System\Camera\FreeCamera.h" />
     <ClInclude Include="MyFramework\System\Control\Control.h" />
+    <ClInclude Include="MyFramework\Render\DepthStencil.h" />
     <ClInclude Include="MyFramework\System\Environment.h" />
     <ClInclude Include="MyFramework\System\Graphics.h" />
     <ClInclude Include="MyFramework\Shader\ComputeShader.h" />
@@ -175,6 +178,7 @@
     <ClInclude Include="MyFramework\Shader\PixelShader.h" />
     <ClInclude Include="MyFramework\Shader\VertexShader.h" />
     <ClInclude Include="MyFramework\System\Light\Light.h" />
+    <ClInclude Include="MyFramework\Render\RenderTarget.h" />
     <ClInclude Include="MyFramework\System\Timer.h" />
     <ClInclude Include="MyFramework\TMI\Remark.h" />
     <ClInclude Include="MyFramework\Utility\Path.h" />
@@ -204,12 +208,15 @@
     <ClCompile Include="MyFramework\Render\Material.cpp" />
     <ClCompile Include="MyFramework\Render\Mesh.cpp" />
     <ClCompile Include="MyFramework\Render\Texture.cpp" />
+    <ClCompile Include="MyFramework\State\BlendState.cpp" />
+    <ClCompile Include="MyFramework\State\DepthStencilState.cpp" />
     <ClCompile Include="MyFramework\State\RasterizerState.cpp" />
     <ClCompile Include="MyFramework\State\SamplerState.cpp" />
     <ClCompile Include="MyFramework\System\Camera\Camera.cpp" />
     <ClCompile Include="MyFramework\System\Camera\FollowCamera.cpp" />
     <ClCompile Include="MyFramework\System\Camera\FreeCamera.cpp" />
     <ClCompile Include="MyFramework\System\Control\Control.cpp" />
+    <ClCompile Include="MyFramework\Render\DepthStencil.cpp" />
     <ClCompile Include="MyFramework\System\Environment.cpp" />
     <ClCompile Include="MyFramework\System\Graphics.cpp" />
     <ClCompile Include="MyFramework\Shader\ComputeShader.cpp" />
@@ -217,6 +224,7 @@
     <ClCompile Include="MyFramework\Shader\Shader.cpp" />
     <ClCompile Include="MyFramework\Shader\PixelShader.cpp" />
     <ClCompile Include="MyFramework\Shader\VertexShader.cpp" />
+    <ClCompile Include="MyFramework\Render\RenderTarget.cpp" />
     <ClCompile Include="MyFramework\System\Timer.cpp" />
     <ClCompile Include="MyFramework\System\Window.cpp" />
     <ClCompile Include="MyFramework\System\WindowsMessageMap.cpp">

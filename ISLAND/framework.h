@@ -92,6 +92,8 @@ using namespace std;
 
 #include "MyFramework/State/RasterizerState.h"
 #include "MyFramework/State/SamplerState.h"
+#include "MyFramework/State/BlendState.h"
+#include "MyFramework/State/DepthStencilState.h"
 
 #include "MyFramework/System/Environment.h"
 
@@ -115,6 +117,8 @@ using namespace std;
 #include "MyFramework/Render/Texture.h"
 #include "MyFramework/Render/Mesh.h"
 #include "MyFramework/Render/Material.h"
+#include "MyFramework/Render/DepthStencil.h"
+#include "MyFramework/Render/RenderTarget.h"
 
 
 // Game Object

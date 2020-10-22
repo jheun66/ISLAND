@@ -10,6 +10,10 @@ Quad::Quad()
 	rasterizerState[1] = new RasterizerState();
 	rasterizerState[1]->FillMode(D3D11_FILL_WIREFRAME);
 
+	blendState[0] = new BlendState();
+	blendState[1] = new BlendState();
+	blendState[1]->Alpha(true);
+
 	UpdateWorld();
 }
 
@@ -20,6 +24,8 @@ Quad::~Quad()
 
 	delete rasterizerState[0];
 	delete rasterizerState[1];
+	delete blendState[0];
+	delete blendState[1];
 }
 
 void Quad::Update()
@@ -33,9 +39,11 @@ void Quad::Render()
 	SetWorldBuffer();
 	material->Set();
 
+	blendState[1]->SetState();
 	//rasterizerState[1]->SetState();
 	DC->DrawIndexed(mesh->GetIndexCount(), 0, 0);
 	//rasterizerState[0]->SetState();
+	blendState[0]->SetState();
 }
 
 void Quad::PostRender()
