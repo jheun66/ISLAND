@@ -1,10 +1,11 @@
 #include "Framework.h"
 
 #include "Scene/CubeScene.h"
+#include "Scene/QuadScene.h"
 
 Program::Program()
 {
-	scene = new CubeScene();
+	scene = new QuadScene();
 }
 
 Program::~Program()

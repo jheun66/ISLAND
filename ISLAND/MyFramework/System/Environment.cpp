@@ -6,7 +6,7 @@ Environment::Environment()
 {
     CreateViewort();
     CreatePerspective();
-    //CreateSamplerState();
+    CreateSamplerState();
 
     mainCamera = new FreeCamera();
 }
@@ -14,7 +14,7 @@ Environment::Environment()
 Environment::~Environment()
 {
     delete projectionBuffer;
-
+    delete samplerState;
 
     delete mainCamera;
 }
@@ -58,8 +58,15 @@ void Environment::CreatePerspective()
 {
     projectionBuffer = new MatrixBuffer();
 
-    projection = XMMatrixPerspectiveFovLH(XM_PIDIV2,
+    projection = XMMatrixPerspectiveFovLH(XM_PIDIV4,
         WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 1000.0f);
 
     projectionBuffer->Set(projection);
+}
+
+void Environment::CreateSamplerState()
+{
+    samplerState = new SamplerState();
+    //samplerState->Address(D3D11_TEXTURE_ADDRESS_CLAMP);
+    samplerState->SetState();
 }

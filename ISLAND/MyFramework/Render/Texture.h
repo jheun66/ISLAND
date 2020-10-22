@@ -1,7 +1,5 @@
 #pragma once
 
-// TODO : 2D때한 Texture2D 참고할 가치가 있음
-
 class Texture
 {
 private:

@@ -18,7 +18,6 @@ public:
 		MaterialBuffer() : ConstantBuffer(&data, sizeof(Data))
 		{
 			data.diffuse = Float4(1, 1, 1, 1);
-			// 현재 터레인 기준(다른거 쓰면 바꿔줘야함)
 			data.specular = Float4(1, 1, 1, 25);
 			data.ambient = Float4(1, 1, 1, 1);
 

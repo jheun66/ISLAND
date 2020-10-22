@@ -115,7 +115,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Framework.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>./</AdditionalIncludeDirectories>
@@ -160,6 +160,9 @@
     <ClInclude Include="MyFramework\Render\Material.h" />
     <ClInclude Include="MyFramework\Render\Mesh.h" />
     <ClInclude Include="MyFramework\Render\Texture.h" />
+    <ClInclude Include="MyFramework\Render\VertexType.h" />
+    <ClInclude Include="MyFramework\State\RasterizerState.h" />
+    <ClInclude Include="MyFramework\State\SamplerState.h" />
     <ClInclude Include="MyFramework\System\Camera\Camera.h" />
     <ClInclude Include="MyFramework\System\Camera\FollowCamera.h" />
     <ClInclude Include="MyFramework\System\Camera\FreeCamera.h" />
@@ -174,6 +177,8 @@
     <ClInclude Include="MyFramework\System\Light\Light.h" />
     <ClInclude Include="MyFramework\System\Timer.h" />
     <ClInclude Include="MyFramework\TMI\Remark.h" />
+    <ClInclude Include="MyFramework\Utility\Path.h" />
+    <ClInclude Include="MyFramework\Utility\Utility.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Program\Scene\CubeScene.h" />
     <ClInclude Include="Program\Scene\QuadScene.h" />
@@ -185,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject\Basic\Cube.cpp" />
+    <ClCompile Include="GameObject\Basic\Quad.cpp" />
     <ClCompile Include="ISLAND.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -195,8 +201,11 @@
     <ClCompile Include="MyFramework\Math\Math.cpp" />
     <ClCompile Include="MyFramework\Math\Transform.cpp" />
     <ClCompile Include="MyFramework\Math\Vector3.cpp" />
+    <ClCompile Include="MyFramework\Render\Material.cpp" />
     <ClCompile Include="MyFramework\Render\Mesh.cpp" />
     <ClCompile Include="MyFramework\Render\Texture.cpp" />
+    <ClCompile Include="MyFramework\State\RasterizerState.cpp" />
+    <ClCompile Include="MyFramework\State\SamplerState.cpp" />
     <ClCompile Include="MyFramework\System\Camera\Camera.cpp" />
     <ClCompile Include="MyFramework\System\Camera\FollowCamera.cpp" />
     <ClCompile Include="MyFramework\System\Camera\FreeCamera.cpp" />
@@ -211,6 +220,12 @@
     <ClCompile Include="MyFramework\System\Timer.cpp" />
     <ClCompile Include="MyFramework\System\Window.cpp" />
     <ClCompile Include="MyFramework\System\WindowsMessageMap.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MyFramework\Utility\Path.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="MyFramework\Utility\Utility.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Program\Program.cpp" />
@@ -233,6 +248,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
+    <FxCompile Include="Shaders\PixelShaders\PixelUV.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
     <FxCompile Include="Shaders\SampleShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
@@ -240,6 +261,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Shaders\VertexShaders\VertexColor.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Shaders\VertexShaders\VertexUV.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -253,6 +280,10 @@
     <ProjectReference Include="..\ImGui\ImGui.vcxproj">
       <Project>{f837907c-520b-4e26-8353-453ddc2f6732}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\PixelShaders\PixelHeader.hlsli" />
+    <None Include="Shaders\VertexShaders\VertexHeader.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

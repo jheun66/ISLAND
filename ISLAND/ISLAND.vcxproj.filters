@@ -120,6 +120,21 @@
     <ClInclude Include="MyFramework\Render\Texture.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="MyFramework\Utility\Path.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\Utility\Utility.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\State\RasterizerState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\Render\VertexType.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\State\SamplerState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISLAND.cpp">
@@ -206,6 +221,24 @@
     <ClCompile Include="MyFramework\Render\Texture.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="MyFramework\Utility\Path.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\Utility\Utility.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\State\RasterizerState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Basic\Quad.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\Render\Material.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\State\SamplerState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ISLAND.rc">
@@ -230,5 +263,11 @@
     <FxCompile Include="Shaders\SampleShader.hlsl" />
     <FxCompile Include="Shaders\VertexShaders\VertexColor.hlsl" />
     <FxCompile Include="Shaders\PixelShaders\PixelColor.hlsl" />
+    <FxCompile Include="Shaders\PixelShaders\PixelUV.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexUV.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\VertexShaders\VertexHeader.hlsli" />
+    <None Include="Shaders\PixelShaders\PixelHeader.hlsli" />
   </ItemGroup>
 </Project>

@@ -2,14 +2,10 @@
 
 class Quad : public Transform
 {
+	typedef VertexUV VertexType;
 private:
-	VertexShader* vertexShader;
-	PixelShader* pixelShader;
-	VertexBuffer* vertexBuffer;
-	IndexBuffer* indexBuffer;
-
-	Texture* texture;
-	ID3D11ShaderResourceView* srv;
+	Mesh* mesh;
+	Material* material;
 
 	RasterizerState* rasterizerState[2];
 
@@ -19,9 +15,10 @@ public:
 
 	void Update();
 	void Render();
+	void PostRender();
 
-	void SetTexure(wstring file);
-	void SetSRV(ID3D11ShaderResourceView* srv) { this->srv = srv; }
+	// DiffuseMap에 넣어버리자
+	void SetTexure(wstring file= L"");
 
 private:
 	void Create();

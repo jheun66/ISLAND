@@ -19,6 +19,7 @@ void FreeCamera::Update()
 
 void FreeCamera::PostRender()
 {
+	__super::PostRender();
 	ImGui::SliderFloat("CamMoveSpeed", &moveSpeed, 1, 50);
 	ImGui::SliderFloat("CamRotSpeed", &rotSpeed, 2.0f, 5.0f);
 }

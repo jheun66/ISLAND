@@ -1,5 +1,6 @@
 #pragma once
 
+// TODO : SamplerState
 class MatrixBuffer;
 
 class Environment
@@ -11,7 +12,7 @@ private:
 
 	Camera* mainCamera;
 
-	//SamplerState* samplerState;
+	SamplerState* samplerState;
 
 	D3D11_VIEWPORT viewport;
 
@@ -36,5 +37,5 @@ public:
 private:
 	void CreateViewort();
 	void CreatePerspective();
-	//void CreateSamplerState();
+	void CreateSamplerState();
 };

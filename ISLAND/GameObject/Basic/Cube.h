@@ -1,5 +1,6 @@
 #pragma once
 
+// TODO : Test용임 게임에 사용 x, 나중에 지우기
 class Cube
 {
 	struct VertexColor

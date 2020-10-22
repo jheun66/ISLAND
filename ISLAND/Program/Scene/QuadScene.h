@@ -3,7 +3,7 @@
 class QuadScene : public Scene
 {
 private:
-
+	Quad* quad;
 
 public:
 	QuadScene();

@@ -19,7 +19,13 @@ VertexBuffer::~VertexBuffer()
 	buffer->Release();
 }
 
-void VertexBuffer::IASet()
+// 슬롯번호는 인스턴스에서 사용할꺼
+void VertexBuffer::IASet(UINT slot)
 {
-	DC->IASetVertexBuffers(0, 1, &buffer, &stride, &offset);
+    DC->IASetVertexBuffers(slot, 1, &buffer, &stride, &offset);
+}
+
+void VertexBuffer::Update(void* data, UINT count)
+{
+    DC->UpdateSubresource(buffer, 0, nullptr, data, stride, count);
 }

@@ -47,3 +47,28 @@ DXGI 기본적인 역활
 출력장치의 나열
 스왑체인 생성(더블 버퍼링)
 */
+
+/*
+* Rasterizer State에서 하는 일
+* 보이지 않는 프리미티브 제거(은면제거, 컬링)
+* 시저 테스트??
+* 깊이 바이어스 계산
+* 프리미티브들을 렌더 타겟 상의 텍셀 단위로 변경
+* 멀티 샘플링이나 필 모드의 설정에 따른 처리
+* 출처 :
+* https://m.blog.naver.com/PostView.nhn?blogId=sorkelf&logNo=40162947758&proxyReferer=https:%2F%2Fwww.google.com%2F
+* 
+*	디폴트 
+* 	rasterizerDesc.AntialiasedLineEnable = false;
+*	rasterizerDesc.CullMode = D3D11_CULL_BACK;
+*	rasterizerDesc.DepthBias = 0;
+*	rasterizerDesc.DepthBiasClamp = 0.0f;
+*	rasterizerDesc.DepthClipEnable = true;
+*	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
+*	rasterizerDesc.FrontCounterClockwise = false;
+*	rasterizerDesc.MultisampleEnable = false;
+*	rasterizerDesc.ScissorEnable = false;
+*	rasterizerDesc.SlopeScaledDepthBias = 0.0f;
+* 
+* 
+*/

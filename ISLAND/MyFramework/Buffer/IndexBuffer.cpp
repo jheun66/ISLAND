@@ -1,6 +1,7 @@
 #include "Framework.h"
 
 IndexBuffer::IndexBuffer(void* data, UINT count)
+    :count(count)
 {
     D3D11_BUFFER_DESC bd = {};
     bd.Usage = D3D11_USAGE_DEFAULT;

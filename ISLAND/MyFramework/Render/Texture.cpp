@@ -12,27 +12,40 @@ Texture::~Texture()
     srv->Release();
 }
 
-// TODO : 파일 확장자 관련 클래스 만들기
 Texture* Texture::Add(wstring file)
 {
     if (totalTexture.count(file) > 0)
         return totalTexture[file];
 
-    wstring extension = Utility::GetExtension(file);
+    TexMetadata metaData;
+    wstring extension = Path::GetExtension(file);
+
+    if (extension == L"tga")
+    {
+        V(GetMetadataFromTGAFile(file.c_str(), metaData));
+    }
+    else if (extension == L"dds")
+    {
+        V(GetMetadataFromDDSFile(file.c_str(), DDS_FLAGS_FORCE_RGB, metaData));
+    }
+    else
+    {
+        V(GetMetadataFromWICFile(file.c_str(), WIC_FLAGS_FORCE_RGB, metaData));
+    }
 
     ScratchImage image;
 
     if (extension == L"tga")
     {
-        V(LoadFromTGAFile(file.c_str(), nullptr, image));
+        V(LoadFromTGAFile(file.c_str(), &metaData, image));
     }
     else if (extension == L"dds")
     {
-        V(LoadFromDDSFile(file.c_str(), DDS_FLAGS_NONE, nullptr, image));
+        V(LoadFromDDSFile(file.c_str(), DDS_FLAGS_FORCE_RGB, &metaData, image));
     }
     else
     {
-        V(LoadFromWICFile(file.c_str(), WIC_FLAGS_FORCE_RGB, nullptr, image));
+        V(LoadFromWICFile(file.c_str(), WIC_FLAGS_FORCE_RGB, &metaData, image));
     }
 
     ID3D11ShaderResourceView* srv;
@@ -40,13 +53,6 @@ Texture* Texture::Add(wstring file)
     V(CreateShaderResourceView(DEVICE, image.GetImages(), image.GetImageCount(),
         image.GetMetadata(), &srv));
 
-    /*
-    * 맵에 넣는 방법
-    totalTexture[file] = new Texture(srv, image);
-    totalTexture.insert(pair<wstring, Texture*>(file, new Texture(srv, image)));
-    totalTexture.insert(make_pair(file, new Texture(srv, image)));
-    totalTexture.insert({ file, new Texture(srv, image) });
-    */
     totalTexture[file] = new Texture(srv, image);
 
     return totalTexture[file];

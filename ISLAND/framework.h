@@ -35,7 +35,7 @@
 #define CAMERA Environment::Get()->MainCamera()
 
 // Windows 헤더 파일
-#include <windows.h>
+#include <Windows.h>
 
 // 자주 쓰는 헤더 파일
 #include <assert.h>
@@ -46,6 +46,7 @@
 #include <unordered_map>
 #include <sstream>
 #include <iomanip>
+#include <functional>
 
 // direct 라이브러리 추가
 #include <d3d11.h>
@@ -89,8 +90,14 @@ using namespace std;
 #include "MyFramework/System/Camera/FreeCamera.h"
 #include "MyFramework/System/Camera/FollowCamera.h"
 
+#include "MyFramework/State/RasterizerState.h"
+#include "MyFramework/State/SamplerState.h"
+
 #include "MyFramework/System/Environment.h"
 
+
+#include "MyFramework/Utility/Utility.h"
+#include "MyFramework/Utility/Path.h"
 
 #include "MyFramework/Shader/Shader.h"
 
@@ -104,7 +111,7 @@ using namespace std;
 #include "MyFramework/Buffer/ConstantBuffer.h"
 #include "MyFramework/Buffer/GlobalBuffer.h"
 
-
+#include "MyFramework/Render/VertexType.h"
 #include "MyFramework/Render/Texture.h"
 #include "MyFramework/Render/Mesh.h"
 #include "MyFramework/Render/Material.h"
