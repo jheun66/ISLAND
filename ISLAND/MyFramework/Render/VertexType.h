@@ -32,7 +32,7 @@ struct VertexUVNormalTangentBlend
 
 
 // 터레인에서 사용할꺼
-struct VertexUVNormalAlpha
+struct VertexTerrain
 {
 	Float3 position;
 	Float2 uv;
@@ -40,8 +40,7 @@ struct VertexUVNormalAlpha
 	Float3 tangent;
 	float alpha[4];
 
-	VertexUVNormalAlpha() : position(0, 0, 0), uv(0, 0), normal(0, 0, 0),
-		alpha{}
+	VertexTerrain() : position(0, 0, 0), uv(0, 0), normal(0, 0, 0), tangent(0,0,0), alpha{}
 	{
 
 	}

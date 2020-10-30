@@ -2,10 +2,11 @@
 
 #include "Scene/CubeScene.h"
 #include "Scene/QuadScene.h"
+#include "Scene/TerrainScene.h"
 
 Program::Program()
 {
-	scene = new QuadScene();
+	scene = new TerrainScene();
 }
 
 Program::~Program()

@@ -125,6 +125,7 @@ using namespace std;
 #include "GameObject/Basic/Cube.h"
 #include "GameObject/Basic/Quad.h"
 
+#include "GameObject/LandScape/Terrain.h"
 
 // Program Header
 #include "Program/Scene/Scene.h"

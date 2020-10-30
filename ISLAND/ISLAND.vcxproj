@@ -150,6 +150,7 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GameObject\Basic\Cube.h" />
     <ClInclude Include="GameObject\Basic\Quad.h" />
+    <ClInclude Include="GameObject\LandScape\Terrain.h" />
     <ClInclude Include="MyFramework\Buffer\ConstantBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\GlobalBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\IndexBuffer.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Program\Scene\CubeScene.h" />
     <ClInclude Include="Program\Scene\QuadScene.h" />
+    <ClInclude Include="Program\Scene\TerrainScene.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Program\Scene\Scene.h" />
     <ClInclude Include="targetver.h" />
@@ -195,6 +197,7 @@
   <ItemGroup>
     <ClCompile Include="GameObject\Basic\Cube.cpp" />
     <ClCompile Include="GameObject\Basic\Quad.cpp" />
+    <ClCompile Include="GameObject\LandScape\Terrain.cpp" />
     <ClCompile Include="ISLAND.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -239,6 +242,7 @@
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Program\Scene\CubeScene.cpp" />
     <ClCompile Include="Program\Scene\QuadScene.cpp" />
+    <ClCompile Include="Program\Scene\TerrainScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ISLAND.rc" />
