@@ -9,6 +9,7 @@ private:
 	Material* material = nullptr;
 
 	Texture* heightMap = nullptr;
+	Texture* gradientMap = nullptr;
 	Texture* alphaMap = nullptr;
 
 	// 기본 텍스처
@@ -39,6 +40,8 @@ public:
 
 	void SaveHeightMap(wstring path);
 	void LoadHeightMap(wstring path);
+	void AdjustGradient(wstring path);
+
 
 private:
 	void CreateTerrain();
@@ -49,5 +52,6 @@ private:
 	void GenerateNoise();
 	float SmoothNoise(float x, float y);
 	float Turbulence(float x, float y, float size);
+
 
 };

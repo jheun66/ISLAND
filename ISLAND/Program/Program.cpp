@@ -7,6 +7,8 @@
 Program::Program()
 {
 	scene = new TerrainScene();
+
+	srand(time(NULL));
 }
 
 Program::~Program()
@@ -107,8 +109,8 @@ void Program::PrintMousePos()
 		| ImGuiWindowFlags_NoMove
 	);
 	{
-		string x = "X : " + to_string(MOUSEPOS.x);
-		string y = "Y : " + to_string(MOUSEPOS.y);
+		string x = "X : " + GameMath::to_string_with_precision(MOUSEPOS.x, 0);
+		string y = "Y : " + GameMath::to_string_with_precision(MOUSEPOS.y, 0);
 		ImGui::TextColored(ImVec4(1, 1, 1, 1), x.c_str());
 		ImGui::TextColored(ImVec4(1, 1, 1, 1), y.c_str());
 	}

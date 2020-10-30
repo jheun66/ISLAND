@@ -25,4 +25,13 @@ namespace GameMath
 	float Distance(const Vector3& v1, const Vector3& v2);
 
 	Vector3 ClosestPointOnLineSegment(const Vector3& A, const Vector3& B, const Vector3& point);
+
+	template <typename T>
+	std::string to_string_with_precision(const T a_value, const int n = 6)
+	{
+		std::ostringstream out;
+		out << std::fixed <<std::setprecision(n) << a_value;
+		return out.str();
+	}
 }
+

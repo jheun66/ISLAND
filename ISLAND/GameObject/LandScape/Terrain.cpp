@@ -57,6 +57,9 @@ void Terrain::PostRender()
 	if (ImGui::Button("Generate Noise", ImVec2(120, 40)))
 		GenerateNoise();
 
+	if (ImGui::Button("Adjust Gradient", ImVec2(120, 40)))
+		AdjustGradient(L"");
+
 }
 
 void Terrain::SaveHeightMap(wstring path)
@@ -121,6 +124,33 @@ void Terrain::LoadHeightMap(wstring path)
 
 		mesh->UpdateVertex(vertices.data(), vertices.size());
 	}	
+}
+
+void Terrain::AdjustGradient(wstring path)
+{
+	if (path == L"")
+	{
+		function<void(wstring)> func = bind(&Terrain::AdjustGradient, this, placeholders::_1);
+		Path::OpenFileDialog(L"", Path::ImageFilter, L".\\", func, hWnd);
+	}
+	else
+	{
+		gradientMap = Texture::Add(path);
+		vector<Float4> pixels = gradientMap->ReadPixels();
+
+		for (UINT i = 0; i < pixels.size(); i++)
+		{
+			vertices[i].position.y -= pixels[i].x * 60.0f;
+			if (vertices[i].position.y < 0)
+				vertices[i].position.y = 0.0f;
+		}
+
+		CreateNormal();
+		CreateTangent();
+		CreateCompute();
+
+		mesh->UpdateVertex(vertices.data(), vertices.size());
+	}
 }
 
 void Terrain::CreateTerrain()
