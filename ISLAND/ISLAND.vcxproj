@@ -150,7 +150,9 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GameObject\Basic\Cube.h" />
     <ClInclude Include="GameObject\Basic\Quad.h" />
+    <ClInclude Include="GameObject\LandScape\QuadTree.h" />
     <ClInclude Include="GameObject\LandScape\Terrain.h" />
+    <ClInclude Include="GameObject\LandScape\TerrainData.h" />
     <ClInclude Include="MyFramework\Buffer\ConstantBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\GlobalBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\IndexBuffer.h" />
@@ -172,6 +174,7 @@
     <ClInclude Include="MyFramework\System\Control\Control.h" />
     <ClInclude Include="MyFramework\Render\DepthStencil.h" />
     <ClInclude Include="MyFramework\System\Environment.h" />
+    <ClInclude Include="MyFramework\System\Frustum\Frustum.h" />
     <ClInclude Include="MyFramework\System\Graphics.h" />
     <ClInclude Include="MyFramework\Shader\ComputeShader.h" />
     <ClInclude Include="MyFramework\Shader\GeometryShader.h" />
@@ -187,6 +190,7 @@
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Program\Scene\CubeScene.h" />
     <ClInclude Include="Program\Scene\QuadScene.h" />
+    <ClInclude Include="Program\Scene\QuadTreeTerrainScene.h" />
     <ClInclude Include="Program\Scene\TerrainScene.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Program\Scene\Scene.h" />
@@ -197,7 +201,9 @@
   <ItemGroup>
     <ClCompile Include="GameObject\Basic\Cube.cpp" />
     <ClCompile Include="GameObject\Basic\Quad.cpp" />
+    <ClCompile Include="GameObject\LandScape\QuadTree.cpp" />
     <ClCompile Include="GameObject\LandScape\Terrain.cpp" />
+    <ClCompile Include="GameObject\LandScape\TerrainData.cpp" />
     <ClCompile Include="ISLAND.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -221,6 +227,7 @@
     <ClCompile Include="MyFramework\System\Control\Control.cpp" />
     <ClCompile Include="MyFramework\Render\DepthStencil.cpp" />
     <ClCompile Include="MyFramework\System\Environment.cpp" />
+    <ClCompile Include="MyFramework\System\Frustum\Frustum.cpp" />
     <ClCompile Include="MyFramework\System\Graphics.cpp" />
     <ClCompile Include="MyFramework\Shader\ComputeShader.cpp" />
     <ClCompile Include="MyFramework\Shader\GeometryShader.cpp" />
@@ -243,6 +250,7 @@
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Program\Scene\CubeScene.cpp" />
     <ClCompile Include="Program\Scene\QuadScene.cpp" />
+    <ClCompile Include="Program\Scene\QuadTreeTerrainScene.cpp" />
     <ClCompile Include="Program\Scene\TerrainScene.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -153,6 +153,18 @@
     <ClInclude Include="GameObject\LandScape\Terrain.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="MyFramework\System\Frustum\Frustum.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\LandScape\QuadTree.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\LandScape\TerrainData.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Scene\QuadTreeTerrainScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISLAND.cpp">
@@ -276,6 +288,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MyFramework\System\Light\Light.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\System\Frustum\Frustum.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\LandScape\QuadTree.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\LandScape\TerrainData.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Scene\QuadTreeTerrainScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

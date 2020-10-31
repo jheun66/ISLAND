@@ -14,9 +14,9 @@ Terrain::Terrain(UINT width, UINT height)
 		indices.data(), indices.size());
 
 	material = new Material(L"Terrain");
-	material->SetDiffuseMap(L"Textures/Terrain/brown_mud_dry_diff_1k.png");
-	material->SetSpecularMap(L"Textures/Terrain/brown_mud_dry_spec_1k.png");
-	material->SetNormalMap(L"Textures/Terrain/brown_mud_dry_nor_1k.png");
+	//material->SetDiffuseMap(L"Textures/Terrain/brown_mud_dry_diff_1k.png");
+	//material->SetSpecularMap(L"Textures/Terrain/brown_mud_dry_spec_1k.png");
+	//material->SetNormalMap(L"Textures/Terrain/brown_mud_dry_nor_1k.png");
 
 	UpdateWorld();
 
@@ -170,7 +170,7 @@ void Terrain::CreateTerrain()
 		{
 			VertexType vertex;
 			vertex.position = Float3(x, 0, z);
-			vertex.uv = Float2((x / (float)width) * 3.0f, (1.0f - (z / (float)height)) * 3.0f);
+			vertex.uv = Float2(x / (float)width, 1.0f - (z / (float)height));
 
 			vertices[index++] = vertex;
 		}

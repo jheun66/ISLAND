@@ -98,6 +98,8 @@ using namespace std;
 #include "MyFramework/System/Light/Light.h"
 #include "MyFramework/System/Environment.h"
 
+#include "MyFramework/System/Frustum/Frustum.h"
+
 
 #include "MyFramework/Utility/Utility.h"
 #include "MyFramework/Utility/Path.h"
@@ -127,6 +129,8 @@ using namespace std;
 #include "GameObject/Basic/Quad.h"
 
 #include "GameObject/LandScape/Terrain.h"
+#include "GameObject/LandScape/TerrainData.h"
+#include "GameObject/LandScape/QuadTree.h"
 
 // Program Header
 #include "Program/Scene/Scene.h"

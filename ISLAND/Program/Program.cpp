@@ -3,10 +3,11 @@
 #include "Scene/CubeScene.h"
 #include "Scene/QuadScene.h"
 #include "Scene/TerrainScene.h"
+#include "Scene/QuadTreeTerrainScene.h"
 
 Program::Program()
 {
-	scene = new TerrainScene();
+	scene = new QuadTreeTerrainScene();
 
 	srand(time(NULL));
 }
