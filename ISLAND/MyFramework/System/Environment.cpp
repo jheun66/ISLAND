@@ -27,6 +27,7 @@ Environment::~Environment()
     delete samplerState;
 
     delete mainCamera;
+    delete lights;
 }
 
 void Environment::ChangeCameraMode(bool isFollowCamera)
@@ -82,14 +83,13 @@ void Environment::PostRender()
 
 void Environment::CreateViewort()
 {
-    D3D11_VIEWPORT vp;
-    vp.Width = WIN_WIDTH;
-    vp.Height = WIN_HEIGHT;
-    vp.MinDepth = 0.0f;
-    vp.MaxDepth = 1.0f;
-    vp.TopLeftX = 0;
-    vp.TopLeftY = 0;
-    DC->RSSetViewports(1, &vp);
+    viewport.Width = WIN_WIDTH;
+    viewport.Height = WIN_HEIGHT;
+    viewport.MinDepth = 0.0f;
+    viewport.MaxDepth = 1.0f;
+    viewport.TopLeftX = 0;
+    viewport.TopLeftY = 0;
+    DC->RSSetViewports(1, &viewport);
 }
 
 void Environment::CreatePerspective()
