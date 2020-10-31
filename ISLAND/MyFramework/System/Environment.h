@@ -2,13 +2,14 @@
 
 // TODO : SamplerState
 class MatrixBuffer;
+class LightBuffer;
 
 class Environment
 {
 private:
 	XMMATRIX projection;
 	MatrixBuffer* projectionBuffer;
-	//LightBuffer* lightBuffer;
+	LightBuffer* lights;
 
 	Camera* mainCamera;
 
@@ -26,7 +27,7 @@ public:
 
 	Camera* MainCamera() { return mainCamera; }
 	MatrixBuffer* GetProjectionBuffer() { return projectionBuffer; }
-	//LightBuffer* GetLight() { return lightBuffer; }
+	LightBuffer* GetLight() { return lights; }
 	XMMATRIX GetProjection() { return projection; }
 
 	void ChangeCameraMode(bool isFollowCamera);

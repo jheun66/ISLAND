@@ -12,11 +12,6 @@ private:
 	Texture* gradientMap = nullptr;
 	Texture* alphaMap = nullptr;
 
-	// 기본 텍스처
-	Texture* defualtDMap = nullptr;
-	Texture* defualtNMap = nullptr;
-	Texture* defualtSMap = nullptr;
-
 	// 2차원
 	UINT width;
 	UINT height;

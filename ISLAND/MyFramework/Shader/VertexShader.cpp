@@ -95,11 +95,11 @@ void VertexShader::CreateInputLayout()
         }
 
         string temp = paramDesc.SemanticName;
-        if (temp == "Position")
+        if (temp == "Position" || temp == "POSITION")
             elementDesc.Format = DXGI_FORMAT_R32G32B32_FLOAT;
 
         // 인스턴스는 직접 지정해주어야함, 확장가능하게  
-        if (temp.find("Instance") != string::npos)
+        if (temp.find("Instance") != string::npos || temp.find("INSTANCE") != string::npos)
         {
             elementDesc.InputSlot = 1;
             elementDesc.InputSlotClass = D3D11_INPUT_PER_INSTANCE_DATA;

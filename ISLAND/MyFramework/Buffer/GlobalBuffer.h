@@ -49,3 +49,36 @@ public:
 	}
 
 };
+
+class LightBuffer : public ConstantBuffer
+{
+public:
+	struct Data
+	{
+		Light lights[MAX_LIGHT];
+
+		UINT lightCount;
+		float padding[3];
+
+		Float4 ambient;
+		Float4 ambientCeil;
+	}data;
+
+	LightBuffer() : ConstantBuffer(&data, sizeof(Data))
+	{
+		data.lightCount = 0;
+
+		data.ambient = { 0.1f,0.1f,0.1f,1.0f };
+		data.ambientCeil = { 0.1f,0.1f,0.1f,1.0f };
+	}
+
+	void Add(Light light)
+	{
+		data.lights[data.lightCount++] = light;
+	}
+	void Add()
+	{
+		data.lightCount++;
+	}
+
+};

@@ -275,6 +275,9 @@
     <ClCompile Include="GameObject\LandScape\Terrain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="MyFramework\System\Light\Light.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ISLAND.rc">
@@ -301,6 +304,8 @@
     <FxCompile Include="Shaders\PixelShaders\PixelColor.hlsl" />
     <FxCompile Include="Shaders\PixelShaders\PixelUV.hlsl" />
     <FxCompile Include="Shaders\VertexShaders\VertexUV.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexTerrain.hlsl" />
+    <FxCompile Include="Shaders\PixelShaders\PixelTerrain.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\VertexShaders\VertexHeader.hlsli" />

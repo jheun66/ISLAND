@@ -95,6 +95,7 @@ using namespace std;
 #include "MyFramework/State/BlendState.h"
 #include "MyFramework/State/DepthStencilState.h"
 
+#include "MyFramework/System/Light/Light.h"
 #include "MyFramework/System/Environment.h"
 
 
