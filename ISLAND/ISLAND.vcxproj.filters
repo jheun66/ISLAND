@@ -141,12 +141,6 @@
     <ClInclude Include="MyFramework\State\DepthStencilState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MyFramework\Render\RenderTarget.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="MyFramework\Render\DepthStencil.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Program\Scene\TerrainScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -163,6 +157,24 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Program\Scene\QuadTreeTerrainScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\System\Reflection\Reflection.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\UI\Render2D.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\System\Refraction\Refraction.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\LandScape\Water.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\System\RenderTarget.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\System\DepthStencil.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -275,12 +287,6 @@
     <ClCompile Include="MyFramework\State\DepthStencilState.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="MyFramework\Render\RenderTarget.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="MyFramework\Render\DepthStencil.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Program\Scene\TerrainScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -300,6 +306,24 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Program\Scene\QuadTreeTerrainScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\UI\Render2D.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\System\Reflection\Reflection.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\System\Refraction\Refraction.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\LandScape\Water.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\System\RenderTarget.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\System\DepthStencil.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -330,6 +354,12 @@
     <FxCompile Include="Shaders\VertexShaders\VertexUV.hlsl" />
     <FxCompile Include="Shaders\VertexShaders\VertexTerrain.hlsl" />
     <FxCompile Include="Shaders\PixelShaders\PixelTerrain.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexReflection.hlsl" />
+    <FxCompile Include="Shaders\PixelShaders\PixelReflection.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexRefraction.hlsl" />
+    <FxCompile Include="Shaders\PixelShaders\PixelRefraction.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexWater.hlsl" />
+    <FxCompile Include="Shaders\PixelShaders\PixelWater.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\VertexShaders\VertexHeader.hlsli" />

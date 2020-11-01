@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 FreeCamera::FreeCamera()
-	:moveSpeed(20.0f), rotSpeed(3.0f)
+	:moveSpeed(60.0f), rotSpeed(3.0f), isFixed(false)
 {
 }
 
@@ -20,12 +20,15 @@ void FreeCamera::Update()
 void FreeCamera::PostRender()
 {
 	__super::PostRender();
-	ImGui::SliderFloat("CamMoveSpeed", &moveSpeed, 1, 50);
+	ImGui::SliderFloat("CamMoveSpeed", &moveSpeed, 1, 500);
 	ImGui::SliderFloat("CamRotSpeed", &rotSpeed, 2.0f, 5.0f);
 }
 
 void FreeCamera::Move()
 {
+	if (isFixed)
+		return;
+
 	if (KEY_PRESS(VK_RBUTTON))
 	{
 		if (KEY_PRESS('W'))

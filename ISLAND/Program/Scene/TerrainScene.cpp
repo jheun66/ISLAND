@@ -3,7 +3,7 @@
 
 TerrainScene::TerrainScene()
 {
-	terrain = new Terrain(256, 256);
+	terrain = new Terrain(1024, 1024);
 }
 
 TerrainScene::~TerrainScene()

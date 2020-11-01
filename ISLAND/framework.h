@@ -98,6 +98,9 @@ using namespace std;
 #include "MyFramework/System/Light/Light.h"
 #include "MyFramework/System/Environment.h"
 
+#include "MyFramework/System/DepthStencil.h"
+#include "MyFramework/System/RenderTarget.h"
+
 #include "MyFramework/System/Frustum/Frustum.h"
 
 
@@ -120,9 +123,9 @@ using namespace std;
 #include "MyFramework/Render/Texture.h"
 #include "MyFramework/Render/Mesh.h"
 #include "MyFramework/Render/Material.h"
-#include "MyFramework/Render/DepthStencil.h"
-#include "MyFramework/Render/RenderTarget.h"
 
+#include "MyFramework/System/Reflection/Reflection.h"
+#include "MyFramework/System/Refraction/Refraction.h"
 
 // Game Object
 #include "GameObject/Basic/Cube.h"
@@ -131,6 +134,9 @@ using namespace std;
 #include "GameObject/LandScape/Terrain.h"
 #include "GameObject/LandScape/TerrainData.h"
 #include "GameObject/LandScape/QuadTree.h"
+#include "GameObject/LandScape/Water.h"
+
+#include "GameObject/UI/Render2D.h"
 
 // Program Header
 #include "Program/Scene/Scene.h"

@@ -6,6 +6,8 @@ private:
 	QuadTree* quadTree;
 	TerrainData* terrainData;
 
+	Water* water;
+
 public:
 	QuadTreeTerrainScene();
 	~QuadTreeTerrainScene();

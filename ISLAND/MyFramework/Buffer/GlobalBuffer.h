@@ -82,3 +82,22 @@ public:
 	}
 
 };
+
+// shader에 시간을 전달할 버퍼
+class TimeBuffer : public ConstantBuffer
+{
+public:
+	struct Data
+	{
+		float time;
+
+		Float3 padding;
+
+		Data() : time(0)
+		{}
+	}data;
+
+	TimeBuffer() : ConstantBuffer(&data, sizeof(Data))
+	{
+	}
+};
