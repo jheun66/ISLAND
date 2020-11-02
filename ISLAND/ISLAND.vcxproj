@@ -78,6 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)Libraries;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Libraries;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -155,7 +157,14 @@
     <ClInclude Include="GameObject\LandScape\Terrain.h" />
     <ClInclude Include="GameObject\LandScape\TerrainData.h" />
     <ClInclude Include="GameObject\LandScape\Water.h" />
+    <ClInclude Include="GameObject\Model\Model.h" />
+    <ClInclude Include="GameObject\Model\ModelAnimator.h" />
+    <ClInclude Include="GameObject\Model\ModelClip.h" />
+    <ClInclude Include="GameObject\Model\ModelMesh.h" />
+    <ClInclude Include="GameObject\Model\ModelRender.h" />
     <ClInclude Include="GameObject\UI\Render2D.h" />
+    <ClInclude Include="MyFramework\Assimp\ModelReader.h" />
+    <ClInclude Include="MyFramework\Assimp\ModelTypes.h" />
     <ClInclude Include="MyFramework\Buffer\ConstantBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\GlobalBuffer.h" />
     <ClInclude Include="MyFramework\Buffer\IndexBuffer.h" />
@@ -190,10 +199,14 @@
     <ClInclude Include="MyFramework\System\Refraction\Refraction.h" />
     <ClInclude Include="MyFramework\System\Timer.h" />
     <ClInclude Include="MyFramework\TMI\Remark.h" />
+    <ClInclude Include="MyFramework\Utility\BinaryReader.h" />
+    <ClInclude Include="MyFramework\Utility\BinaryWriter.h" />
     <ClInclude Include="MyFramework\Utility\Path.h" />
+    <ClInclude Include="MyFramework\Utility\tinyxml2.h" />
     <ClInclude Include="MyFramework\Utility\Utility.h" />
     <ClInclude Include="Program\Program.h" />
     <ClInclude Include="Program\Scene\CubeScene.h" />
+    <ClInclude Include="Program\Scene\ModelScene.h" />
     <ClInclude Include="Program\Scene\QuadScene.h" />
     <ClInclude Include="Program\Scene\QuadTreeTerrainScene.h" />
     <ClInclude Include="Program\Scene\TerrainScene.h" />
@@ -211,11 +224,17 @@
     <ClCompile Include="GameObject\LandScape\Terrain.cpp" />
     <ClCompile Include="GameObject\LandScape\TerrainData.cpp" />
     <ClCompile Include="GameObject\LandScape\Water.cpp" />
+    <ClCompile Include="GameObject\Model\Model.cpp" />
+    <ClCompile Include="GameObject\Model\ModelAnimator.cpp" />
+    <ClCompile Include="GameObject\Model\ModelClip.cpp" />
+    <ClCompile Include="GameObject\Model\ModelMesh.cpp" />
+    <ClCompile Include="GameObject\Model\ModelRender.cpp" />
     <ClCompile Include="GameObject\UI\Render2D.cpp" />
     <ClCompile Include="ISLAND.cpp" />
     <ClCompile Include="Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="MyFramework\Assimp\ModelReader.cpp" />
     <ClCompile Include="MyFramework\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="MyFramework\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="MyFramework\Buffer\VertexBuffer.cpp" />
@@ -251,14 +270,18 @@
     <ClCompile Include="MyFramework\System\WindowsMessageMap.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="MyFramework\Utility\BinaryReader.cpp" />
+    <ClCompile Include="MyFramework\Utility\BinaryWriter.cpp" />
     <ClCompile Include="MyFramework\Utility\Path.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="MyFramework\Utility\tinyxml2.cpp" />
     <ClCompile Include="MyFramework\Utility\Utility.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Program\Program.cpp" />
     <ClCompile Include="Program\Scene\CubeScene.cpp" />
+    <ClCompile Include="Program\Scene\ModelScene.cpp" />
     <ClCompile Include="Program\Scene\QuadScene.cpp" />
     <ClCompile Include="Program\Scene\QuadTreeTerrainScene.cpp" />
     <ClCompile Include="Program\Scene\TerrainScene.cpp" />
@@ -274,6 +297,12 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\PixelShaders\PixelColor.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Shaders\PixelShaders\PixelModel.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -327,6 +356,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="Shaders\VertexShaders\VertexAnimation.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
     <FxCompile Include="Shaders\VertexShaders\VertexColor.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
@@ -340,6 +375,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Shaders\VertexShaders\VertexRefraction.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Shaders\VertexShaders\VertexRender.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

@@ -16,13 +16,13 @@ PixelInput main(VertexInstance input)
     
     matrix transform = 0;
     
-    //[flatten]
-    //if (modelType)
-    //{
-    //    transform = SkinWorld(input.instanceID, input.indices, input.weights);
-    //    transform = mul(transform, input.transform);
-    //}
-    //else
+    [flatten]
+    if (modelType)
+    {
+        transform = SkinWorld(input.instanceID, input.indices, input.weights);
+        transform = mul(transform, input.transform);
+    }
+    else
         transform = input.transform;
 	
     output.pos = mul(input.pos, transform);

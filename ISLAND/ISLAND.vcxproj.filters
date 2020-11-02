@@ -180,6 +180,39 @@
     <ClInclude Include="GameObject\LandScape\Scattering.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="MyFramework\Utility\tinyxml2.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\Utility\BinaryWriter.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\Utility\BinaryReader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\Assimp\ModelReader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\Assimp\ModelTypes.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Model\Model.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Model\ModelAnimator.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Model\ModelClip.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Model\ModelMesh.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\Model\ModelRender.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Scene\ModelScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISLAND.cpp">
@@ -332,6 +365,36 @@
     <ClCompile Include="GameObject\LandScape\Scattering.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="MyFramework\Utility\tinyxml2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\Utility\BinaryReader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\Utility\BinaryWriter.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\Assimp\ModelReader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Model\Model.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Model\ModelAnimator.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Model\ModelClip.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Model\ModelMesh.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\Model\ModelRender.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Scene\ModelScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ISLAND.rc">
@@ -370,6 +433,9 @@
     <FxCompile Include="Shaders\PixelShaders\PixelScatteringTarget.hlsl" />
     <FxCompile Include="Shaders\VertexShaders\VertexScattering.hlsl" />
     <FxCompile Include="Shaders\PixelShaders\PixelScattering.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexAnimation.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexRender.hlsl" />
+    <FxCompile Include="Shaders\PixelShaders\PixelModel.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\VertexShaders\VertexHeader.hlsli" />

@@ -14,6 +14,11 @@
 #define WIN_START_X 100
 #define WIN_START_Y 100
 
+// 본 개수 제한
+#define MAX_MODEL_BONE 500
+#define MAX_ANIM_KEY 500
+#define MAX_MODEL_INSTANCE 500
+
 // 디버그 아니면 무시
 #ifdef NDEBUG
 #define V(hr) hr
@@ -70,6 +75,14 @@
 // DirectXTex
 #include "../DirectXTex/DirectXTex.h"
 
+// Assimp
+#include <Assimp/Importer.hpp>
+#include <Assimp/scene.h>
+#include <Assimp/postprocess.h>
+
+#pragma comment(lib, "Assimp/assimp-vc142-mtd.lib")
+
+
 // 자주 사용하는 namespace
 using namespace DirectX;
 using namespace std;
@@ -106,6 +119,9 @@ using namespace std;
 
 #include "MyFramework/Utility/Utility.h"
 #include "MyFramework/Utility/Path.h"
+#include "MyFramework/Utility/BinaryReader.h"
+#include "MyFramework/Utility/BinaryWriter.h"
+#include "MyFramework/Utility/tinyxml2.h"
 
 #include "MyFramework/Shader/Shader.h"
 
@@ -127,6 +143,9 @@ using namespace std;
 #include "MyFramework/System/Reflection/Reflection.h"
 #include "MyFramework/System/Refraction/Refraction.h"
 
+#include "MyFramework/Assimp/ModelTypes.h"
+#include "MyFramework/Assimp/ModelReader.h"
+
 // Game Object
 #include "GameObject/Basic/Cube.h"
 #include "GameObject/Basic/Quad.h"
@@ -136,6 +155,12 @@ using namespace std;
 #include "GameObject/LandScape/QuadTree.h"
 #include "GameObject/LandScape/Water.h"
 #include "GameObject/LandScape/Scattering.h"
+
+#include "GameObject/Model/ModelMesh.h"
+#include "GameObject/Model/ModelClip.h"
+#include "GameObject/Model/Model.h"
+#include "GameObject/Model/ModelRender.h"
+#include "GameObject/Model/ModelAnimator.h"
 
 #include "GameObject/UI/Render2D.h"
 

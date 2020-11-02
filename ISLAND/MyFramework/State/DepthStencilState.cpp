@@ -24,7 +24,8 @@ DepthStencilState::DepthStencilState()
 
 DepthStencilState::~DepthStencilState()
 {
-	state->Release();
+	if (state != nullptr)
+		state->Release();
 }
 
 void DepthStencilState::SetState(UINT stencilRef)

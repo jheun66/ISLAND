@@ -3,6 +3,8 @@
 class Transform
 {
 public:
+	bool isActive;
+
 	string tag;
 
 	Vector3 position;
@@ -38,4 +40,6 @@ public:
 	Vector3 WorldPos();
 	Vector4 WorldRot();
 	Vector3 WorldScale();
+
+	void PostRender();
 };

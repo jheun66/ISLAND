@@ -65,3 +65,22 @@ Vector3 Transform::WorldScale()
 {
 	return globalScale;
 }
+
+void Transform::PostRender()
+{
+	//if (!isActive)
+	//	return;
+
+	//Vector3 screenPos;
+
+	//Vector3 offset = { 0,10,0 };
+	//Vector3 temp = globalPosition + offset;
+
+	//screenPos = WorldToScreen(temp);
+
+	//POINT size = { 100,100 };
+
+	//RECT rect = { screenPos.x - size.x / 2, screenPos.y - size.y / 2, rect.left + size.x, rect.top + size.y };
+
+	//DirectWrite::Get()->RenderText(ToWString(tag), rect);
+}

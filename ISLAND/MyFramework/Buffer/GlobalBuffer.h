@@ -101,3 +101,42 @@ public:
 	{
 	}
 };
+
+// 옵션이나 세팅등을 보내는 용도
+class SettingBuffer : public ConstantBuffer
+{
+public:
+	struct Data
+	{
+		int option[4];
+
+		Data() :option{}
+		{}
+	}data;
+
+	SettingBuffer() : ConstantBuffer(&data, sizeof(Data))
+	{
+	}
+};
+
+
+class BoneBuffer : public ConstantBuffer
+{
+public:
+	struct Data
+	{
+		Matrix bones[MAX_MODEL_BONE];
+	}data;
+
+	BoneBuffer() : ConstantBuffer(&data, sizeof(Data))
+	{
+		for (UINT i = 0; i < MAX_MODEL_BONE; i++)
+			data.bones[i] = XMMatrixIdentity();
+	}
+
+	void Add(Matrix matrix, UINT index)
+	{
+		//data.bones[index] = matrix;
+		data.bones[index] = XMMatrixTranspose(matrix);
+	}
+};
