@@ -7,6 +7,7 @@ private:
 	TerrainData* terrainData;
 
 	Water* water;
+	Scattering* scattering;
 
 public:
 	QuadTreeTerrainScene();

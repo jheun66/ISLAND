@@ -8,6 +8,8 @@ QuadTreeTerrainScene::QuadTreeTerrainScene()
 
 	water = new Water(128);
 	water->position.y = 5.0f;
+
+	scattering = new Scattering();
 }
 
 QuadTreeTerrainScene::~QuadTreeTerrainScene()
@@ -16,6 +18,7 @@ QuadTreeTerrainScene::~QuadTreeTerrainScene()
 	delete quadTree;
 
 	delete water;
+	delete scattering;
 }
 
 void QuadTreeTerrainScene::Update()
@@ -23,16 +26,19 @@ void QuadTreeTerrainScene::Update()
 	water->Update();
 
 	quadTree->Update();
+	scattering->Update();
 }
 
 void QuadTreeTerrainScene::PreRender()
 {
+	scattering->PreRender();
 	water->SetRefraction();
 	water->SetReflection();
 }
 
 void QuadTreeTerrainScene::Render()
 {
+	scattering->Render();
 	quadTree->Render();
 	water->Render();
 }
@@ -41,4 +47,5 @@ void QuadTreeTerrainScene::PostRender()
 {
 	quadTree->PostRender();
 	water->PostRender();
+	scattering->PostRender();
 }

@@ -5,6 +5,7 @@ class Light
 {
 private:
 	friend class Environment;
+	friend class Scattering;
 	enum Type
 	{
 		DIRECTION,

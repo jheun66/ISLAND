@@ -135,6 +135,7 @@ using namespace std;
 #include "GameObject/LandScape/TerrainData.h"
 #include "GameObject/LandScape/QuadTree.h"
 #include "GameObject/LandScape/Water.h"
+#include "GameObject/LandScape/Scattering.h"
 
 #include "GameObject/UI/Render2D.h"
 
