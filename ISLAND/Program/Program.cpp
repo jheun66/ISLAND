@@ -8,7 +8,7 @@
 
 Program::Program()
 {
-	scene = new ModelScene();
+	scene = new TerrainScene();
 
 	srand(time(NULL));
 }

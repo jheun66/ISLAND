@@ -35,13 +35,11 @@ struct VertexUVNormalTangentBlend
 struct VertexTerrain
 {
 	Float3 position;
+	Float4 color;
 	Float2 uv;
 	Float3 normal;
-	Float3 tangent;
-	float alpha[4];
 
-	VertexTerrain() : position(0, 0, 0), uv(0, 0), normal(0, 0, 0), tangent(0,0,0), alpha{}
+	VertexTerrain() : position(0, 0, 0), color(1, 1, 1, 1), uv(0, 0), normal(0, 0, 0)
 	{
-
 	}
 };

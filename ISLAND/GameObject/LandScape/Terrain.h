@@ -10,7 +10,8 @@ private:
 
 	Texture* heightMap = nullptr;
 	Texture* gradientMap = nullptr;
-	Texture* alphaMap = nullptr;
+
+	bool viewWire = false;
 
 	// 2차원
 	UINT width;
@@ -18,13 +19,19 @@ private:
 	
 	vector<VertexType> vertices;
 	vector<UINT> indices;
+	vector<VertexType> alignedVertices;
 
 	RasterizerState* rs[2];
 
 	// 노이즈 저장
 	vector<vector<float>> noise; 
 
+	float colorSpread;
+	float halfSpread;
+	vector<Float4> terrain_cols;
+	float part;
 
+	float maxH;
 public:
 	Terrain(UINT width, UINT hegiht);
 	~Terrain();
@@ -40,9 +47,12 @@ public:
 
 private:
 	void CreateTerrain();
+	void AlignVertices();
+	void CreateColor();
 	void CreateNormal();
-	void CreateTangent();
 	void CreateCompute();
+
+	Float4 calculateColor(float height, float amplitude);
 
 	void GenerateNoise();
 	float SmoothNoise(float x, float y);

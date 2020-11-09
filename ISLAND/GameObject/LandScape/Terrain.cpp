@@ -1,22 +1,29 @@
 #include "Framework.h"
 
 Terrain::Terrain(UINT width, UINT height)
-	:width(width), height(height)
+	:width(width), height(height), maxH(60.0f)
 {
+	// terrain color
+	colorSpread = 0.45f;
+	halfSpread = colorSpread / 2;
+	terrain_cols = { Float4(201 / 255.0f, 178 / 255.0f, 99 / 255.0f, 1),
+	Float4(135 / 255.0f, 184 / 255.0f, 82 / 255.0f, 1),
+	Float4(80 / 255.0f, 171 / 255.0f, 93 / 255.0f, 1),
+	Float4(120 / 255.0f, 120 / 255.0f, 120 / 255.0f, 1),
+	Float4(200 / 255.0f, 200 / 255.0f, 210 / 255.0f, 1) };
+	part = 1.0f / (terrain_cols.size() - 1);
+
 	CreateTerrain();
+	CreateColor();
+	AlignVertices();
 	CreateNormal();
-	CreateTangent();
-	// compute, alphaMap 은 나중에 추가
 	CreateCompute(); // 아직 구현 x
 
 
-	mesh = new Mesh(vertices.data(), sizeof(VertexType), vertices.size(),
+	mesh = new Mesh(alignedVertices.data(), sizeof(VertexType), alignedVertices.size(),
 		indices.data(), indices.size());
 
 	material = new Material(L"Terrain");
-	//material->SetDiffuseMap(L"Textures/Terrain/brown_mud_dry_diff_1k.png");
-	//material->SetSpecularMap(L"Textures/Terrain/brown_mud_dry_spec_1k.png");
-	//material->SetNormalMap(L"Textures/Terrain/brown_mud_dry_nor_1k.png");
 
 	UpdateWorld();
 
@@ -41,9 +48,10 @@ void Terrain::Render()
 	SetWorldBuffer();
 	material->Set();
 
-	//rs[1]->SetState();
+	if(viewWire)
+		rs[1]->SetState();
 	DC->DrawIndexed(indices.size(), 0, 0);
-	//rs[0]->SetState();
+	rs[0]->SetState();
 
 }
 
@@ -66,6 +74,11 @@ void Terrain::PostRender()
 	if (ImGui::Button("Adjust Gradient", ImVec2(120, 40)))
 		AdjustGradient(L"");
 
+	if (ImGui::Button("View Wire", ImVec2(120, 40)))
+	{
+		viewWire = !viewWire;
+	}
+
 }
 
 void Terrain::SaveHeightMap(wstring path)
@@ -82,7 +95,7 @@ void Terrain::SaveHeightMap(wstring path)
 
 		for (UINT i = 0; i < size / 4; i++)
 		{
-			float y = (vertices[i].position.y) / 60.0f * 255.0f;
+			float y = (vertices[i].position.y) / maxH * 255.0f;
 
 			for (UINT j = 0; j < 3; j++)
 			{
@@ -121,14 +134,15 @@ void Terrain::LoadHeightMap(wstring path)
 		for (UINT i = 0; i < pixels.size(); i++)
 		{
 			vertices[i].position.y = 0;
-			vertices[i].position.y += pixels[i].x * 60.0f;
+			vertices[i].position.y += pixels[i].x * maxH;
 		}
 
+		CreateColor();
+		AlignVertices();
 		CreateNormal();
-		CreateTangent();
 		CreateCompute();
 
-		mesh->UpdateVertex(vertices.data(), vertices.size());
+		mesh->UpdateVertex(alignedVertices.data(), alignedVertices.size());
 	}	
 }
 
@@ -146,16 +160,30 @@ void Terrain::AdjustGradient(wstring path)
 
 		for (UINT i = 0; i < pixels.size(); i++)
 		{
-			vertices[i].position.y -= pixels[i].x * 60.0f;
+			vertices[i].position.y -= pixels[i].x * maxH;
 			if (vertices[i].position.y < 0)
 				vertices[i].position.y = 0.0f;
 		}
 
+		CreateColor();
+		AlignVertices();
 		CreateNormal();
-		CreateTangent();
 		CreateCompute();
 
-		mesh->UpdateVertex(vertices.data(), vertices.size());
+		mesh->UpdateVertex(alignedVertices.data(), alignedVertices.size());
+	}
+}
+
+void Terrain::CreateColor()
+{
+	UINT index = 0;
+	for (UINT z = 0; z < height; z++)
+	{
+		for (UINT x = 0; x < width; x++)
+		{
+			vertices[index].color = calculateColor(vertices[index].position.y, maxH);
+			index++;
+		}
 	}
 }
 
@@ -176,18 +204,70 @@ void Terrain::CreateTerrain()
 		}
 	}
 
+	index = 0;
 	for (UINT z = 0; z < height-1; z++)
 	{
 		for (UINT x = 0; x < width-1; x++)
 		{
-			indices.emplace_back(width * z + x);
-			indices.emplace_back(width * (z + 1) + x);
-			indices.emplace_back(width * (z + 1) + x + 1);
-			indices.emplace_back(width * z + x);
-			indices.emplace_back(width * (z + 1) + x + 1);
-			indices.emplace_back(width * z + x + 1);
+			if (x % 2 == 0)
+			{
+				alignedVertices.push_back(vertices[width * z + x]);
+				alignedVertices.push_back(vertices[width * (z + 1) + x]);
+				alignedVertices.push_back(vertices[width * (z + 1) + x + 1]);
+				alignedVertices.push_back(vertices[width * z + x]);
+				alignedVertices.push_back(vertices[width * (z + 1) + x + 1]);
+				alignedVertices.push_back(vertices[width * z + x + 1]);
+			}
+			else
+			{
+				alignedVertices.push_back(vertices[width * z + x]);
+				alignedVertices.push_back(vertices[width * (z + 1) + x]);
+				alignedVertices.push_back(vertices[width * z + x + 1]);
+				alignedVertices.push_back(vertices[width * (z + 1) + x]);
+				alignedVertices.push_back(vertices[width * (z + 1) + x + 1]);
+				alignedVertices.push_back(vertices[width * z + x + 1]);
+			}
+
+			for (int i = 0; i < 6; i++)
+			{
+				indices.emplace_back(index++);
+			}
 		}
 	}
+
+}
+
+void Terrain::AlignVertices()
+{
+
+	UINT index = 0;
+	for (UINT z = 0; z < height - 1; z++)
+	{
+		for (UINT x = 0; x < width - 1; x++)
+		{
+			if (!((x % 2)^(z % 2)))
+			{
+				alignedVertices[index++] = vertices[width * z + x];
+				alignedVertices[index++] = vertices[width * (z + 1) + x];
+				alignedVertices[index++] = vertices[width * (z + 1) + x + 1];
+
+				alignedVertices[index++] = vertices[width * z + x];
+				alignedVertices[index++] = vertices[width * (z + 1) + x + 1];
+				alignedVertices[index++] = vertices[width * z + x + 1];
+			}
+			else
+			{
+				alignedVertices[index++] = vertices[width * z + x];
+				alignedVertices[index++] = vertices[width * (z + 1) + x];
+				alignedVertices[index++] = vertices[width * z + x + 1];
+
+				alignedVertices[index++] = vertices[width * (z + 1) + x];
+				alignedVertices[index++] = vertices[width * (z + 1) + x + 1];
+				alignedVertices[index++] = vertices[width * z + x + 1];
+			}
+		}
+	}
+
 
 }
 
@@ -195,77 +275,43 @@ void Terrain::CreateNormal()
 {
 	for (UINT i = 0; i < indices.size() / 3; i++)
 	{
-		UINT index0 = indices[i * 3 + 0];
-		UINT index1 = indices[i * 3 + 1];
-		UINT index2 = indices[i * 3 + 2];
+		UINT index0 = i * 3 + 0;
+		UINT index1 = i * 3 + 1;
+		UINT index2 = i * 3 + 2;
 
-		Vector3 v0 = vertices[index0].position;
-		Vector3 v1 = vertices[index1].position;
-		Vector3 v2 = vertices[index2].position;
+		Vector3 v0 = alignedVertices[index0].position;
+		Vector3 v1 = alignedVertices[index1].position;
+		Vector3 v2 = alignedVertices[index2].position;
 
 		Vector3 A = v1 - v0;
 		Vector3 B = v2 - v0;
 
 		Vector3 normal = Vector3::Cross(A, B).Normal();
 
-		vertices[index0].normal = (vertices[index0].normal + normal).Normal();
-		vertices[index1].normal = (vertices[index1].normal + normal).Normal();
-		vertices[index2].normal = (vertices[index2].normal + normal).Normal();
-	}
-}
-
-void Terrain::CreateTangent()
-{
-	for (UINT i = 0; i < indices.size() / 3; i++)
-	{
-		UINT index0 = indices[i * 3 + 0];
-		UINT index1 = indices[i * 3 + 1];
-		UINT index2 = indices[i * 3 + 2];
-
-		VertexType vertex0 = vertices[index0];
-		VertexType vertex1 = vertices[index1];
-		VertexType vertex2 = vertices[index2];
-
-		Vector3 p0 = vertex0.position;
-		Vector3 p1 = vertex1.position;
-		Vector3 p2 = vertex2.position;
-
-		XMFLOAT2 uv0 = vertex0.uv;
-		XMFLOAT2 uv1 = vertex1.uv;
-		XMFLOAT2 uv2 = vertex2.uv;
-
-		Vector3 e0 = p1 - p0;
-		Vector3 e1 = p2 - p0;
-
-		float u0 = uv1.x - uv0.x;
-		float u1 = uv2.x - uv0.x;
-		float v0 = uv1.y - uv0.y;
-		float v1 = uv2.y - uv0.y;
-
-		float d = 1.0f / (u0 * v1 - v0 * u1);
-
-		Vector3 tangent;
-		tangent = (v1 * e0 - v0 * e1) * d;
-
-		vertices[index0].tangent = tangent + vertices[index0].tangent;
-		vertices[index1].tangent = tangent + vertices[index1].tangent;
-		vertices[index2].tangent = tangent + vertices[index2].tangent;
-
-	}
-
-	for (VertexType& vertex : vertices)
-	{
-		Vector3 t = vertex.tangent;
-		Vector3 n = vertex.normal;
-
-		Vector3 temp = (t - n * Vector3::Dot(n, t)).Normal();
-
-		vertex.tangent = temp;
+		alignedVertices[index0].normal = normal;
+		alignedVertices[index1].normal = normal;
+		alignedVertices[index2].normal = normal;
 	}
 }
 
 void Terrain::CreateCompute()
 {
+}
+
+Float4 Terrain::calculateColor(float height, float amplitude)
+{
+	Float4 returnColor = { 0.0f, 0.0f, 0.0f, 1.0f };
+	
+	height = 2 * height - amplitude;
+	float value = (height + amplitude) / (amplitude * 2);
+
+	value = GameMath::Clamp((value - halfSpread) * (1.0f / colorSpread), 0.0f, 0.9999f);
+	int firstBiome = (int)floor(value / part);
+	float blend = (value - (firstBiome * part)) / part;
+	returnColor.x = LERP(terrain_cols[firstBiome].x, terrain_cols[firstBiome + 1].x, blend);
+	returnColor.y = LERP(terrain_cols[firstBiome].y, terrain_cols[firstBiome + 1].y, blend);
+	returnColor.z = LERP(terrain_cols[firstBiome].z, terrain_cols[firstBiome + 1].z, blend);
+	return returnColor;
 }
 
 void Terrain::GenerateNoise()
@@ -295,15 +341,16 @@ void Terrain::GenerateNoise()
 			UINT index = i * height + j;
 
 			vertices[index].position.y = 0.0f;
-			vertices[index].position.y += Turbulence(j, i, 64) * 60.0f;
+			vertices[index].position.y += Turbulence(j, i, 64) * maxH;
 		}
 	}
 
+	CreateColor();
+	AlignVertices();
 	CreateNormal();
-	CreateTangent();
 	CreateCompute();
 
-	mesh->UpdateVertex(vertices.data(), vertices.size());
+	mesh->UpdateVertex(alignedVertices.data(), alignedVertices.size());
 }
 
 float Terrain::SmoothNoise(float x, float y)

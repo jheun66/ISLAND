@@ -19,6 +19,8 @@ namespace GameMath
 {
 	float Saturate(const float& value);
 
+	float Clamp(float value, float minF, float maxF);
+
 	int Random(int min, int max);
 	float Random(float min, float max);
 

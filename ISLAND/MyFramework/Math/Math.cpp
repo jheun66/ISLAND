@@ -5,6 +5,13 @@ float GameMath::Saturate(const float& value)
     return max(0.0f, min(1.0f, value));
 }
 
+float GameMath::Clamp(float value, float minF, float maxF)
+{
+    value = max(minF, value);
+    value = min(maxF, value);
+    return value;
+}
+
 int GameMath::Random(int min, int max)
 {
     return rand() % (max - min) + min;
