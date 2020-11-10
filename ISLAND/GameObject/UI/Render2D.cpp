@@ -22,6 +22,9 @@ Render2D::~Render2D()
 	delete depthState[0];
 	delete depthState[1];
 
+	delete blendState[0];
+	delete blendState[1];
+
 	delete viewBuffer;
 	delete projectionBuffer;
 }

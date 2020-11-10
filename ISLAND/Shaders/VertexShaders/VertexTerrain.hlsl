@@ -1,5 +1,10 @@
 #include "VertexHeader.hlsli"
 
+cbuffer ClipPlaneBuffer : register(b10)
+{
+    float4 clipPlane;
+}
+
 struct VertexInput
 {
     float4 pos : Position;
@@ -16,6 +21,8 @@ struct PixelInput
     float3 normal : NORMAL;
     float3 worldPos : POSITION0;
     float3 camPos : POSITION1;
+    
+    float clip : SV_ClipDistance0;
 };
 
 
@@ -35,6 +42,8 @@ PixelInput main(VertexInput input)
     output.uv = input.uv;
 
     output.normal = mul(input.normal, (float3x3) world);
+    
+    output.clip = dot(mul(input.pos, world), clipPlane);
     
     return output;
 }

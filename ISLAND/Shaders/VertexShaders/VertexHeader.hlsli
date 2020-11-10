@@ -51,6 +51,13 @@ cbuffer Type : register(b5)
     int modelType;
 }
 
+
+// 시간 버퍼 9 번에 세팅!!
+cbuffer TimeBuffer : register(b9)
+{
+    float time;
+}
+
 Texture2DArray transformMap : register(t0);
 
 

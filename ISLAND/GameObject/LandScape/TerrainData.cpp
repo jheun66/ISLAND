@@ -6,7 +6,7 @@ TerrainData::TerrainData(wstring heightFile)
 
 	CreateData();
 	CreateNormal();
-	CreateTangent();
+	//CreateTangent();
 
 	AlignVertexData();
 }
@@ -75,55 +75,55 @@ void TerrainData::CreateNormal()
 	}
 }
 
-void TerrainData::CreateTangent()
-{
-	for (UINT i = 0; i < indices.size() / 3; i++)
-	{
-		UINT index0 = indices[i * 3 + 0];
-		UINT index1 = indices[i * 3 + 1];
-		UINT index2 = indices[i * 3 + 2];
-
-		VertexType vertex0 = prevData[index0];
-		VertexType vertex1 = prevData[index1];
-		VertexType vertex2 = prevData[index2];
-
-		Vector3 p0 = vertex0.position;
-		Vector3 p1 = vertex1.position;
-		Vector3 p2 = vertex2.position;
-
-		Float2 uv0 = vertex0.uv;
-		Float2 uv1 = vertex1.uv;
-		Float2 uv2 = vertex2.uv;
-
-		Vector3 e0 = p1 - p0;
-		Vector3 e1 = p2 - p0;
-
-		float u0 = uv1.x - uv0.x;
-		float u1 = uv2.x - uv0.x;
-		float v0 = uv1.y - uv0.y;
-		float v1 = uv2.y - uv0.y;
-
-		float d = 1.0f / (u0 * v1 - v0 * u1);
-
-		Vector3 tangent;
-		tangent = (v1 * e0 - v0 * e1) * d;
-
-		prevData[index0].tangent = tangent + prevData[index0].tangent;
-		prevData[index1].tangent = tangent + prevData[index1].tangent;
-		prevData[index2].tangent = tangent + prevData[index2].tangent;
-
-	}
-
-	for (VertexType& vertex : prevData)
-	{
-		Vector3 t = vertex.tangent;
-		Vector3 n = vertex.normal;
-
-		Vector3 temp = (t - n * Vector3::Dot(n, t)).Normal();
-
-		vertex.tangent = temp;
-	}
-}
+//void TerrainData::CreateTangent()
+//{
+//	for (UINT i = 0; i < indices.size() / 3; i++)
+//	{
+//		UINT index0 = indices[i * 3 + 0];
+//		UINT index1 = indices[i * 3 + 1];
+//		UINT index2 = indices[i * 3 + 2];
+//
+//		VertexType vertex0 = prevData[index0];
+//		VertexType vertex1 = prevData[index1];
+//		VertexType vertex2 = prevData[index2];
+//
+//		Vector3 p0 = vertex0.position;
+//		Vector3 p1 = vertex1.position;
+//		Vector3 p2 = vertex2.position;
+//
+//		Float2 uv0 = vertex0.uv;
+//		Float2 uv1 = vertex1.uv;
+//		Float2 uv2 = vertex2.uv;
+//
+//		Vector3 e0 = p1 - p0;
+//		Vector3 e1 = p2 - p0;
+//
+//		float u0 = uv1.x - uv0.x;
+//		float u1 = uv2.x - uv0.x;
+//		float v0 = uv1.y - uv0.y;
+//		float v1 = uv2.y - uv0.y;
+//
+//		float d = 1.0f / (u0 * v1 - v0 * u1);
+//
+//		Vector3 tangent;
+//		tangent = (v1 * e0 - v0 * e1) * d;
+//
+//		prevData[index0].tangent = tangent + prevData[index0].tangent;
+//		prevData[index1].tangent = tangent + prevData[index1].tangent;
+//		prevData[index2].tangent = tangent + prevData[index2].tangent;
+//
+//	}
+//
+//	for (VertexType& vertex : prevData)
+//	{
+//		Vector3 t = vertex.tangent;
+//		Vector3 n = vertex.normal;
+//
+//		Vector3 temp = (t - n * Vector3::Dot(n, t)).Normal();
+//
+//		vertex.tangent = temp;
+//	}
+//}
 
 void TerrainData::AlignVertexData()
 {

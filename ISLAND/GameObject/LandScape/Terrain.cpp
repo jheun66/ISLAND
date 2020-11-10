@@ -209,7 +209,7 @@ void Terrain::CreateTerrain()
 	{
 		for (UINT x = 0; x < width-1; x++)
 		{
-			if (x % 2 == 0)
+			if (!((x % 2) ^ (z % 2)))
 			{
 				alignedVertices.push_back(vertices[width * z + x]);
 				alignedVertices.push_back(vertices[width * (z + 1) + x]);

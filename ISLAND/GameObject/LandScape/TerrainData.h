@@ -20,7 +20,7 @@ public:
 
 	void CreateData();
 	void CreateNormal();
-	void CreateTangent();
+	//void CreateTangent();
 
 	void AlignVertexData();
 };

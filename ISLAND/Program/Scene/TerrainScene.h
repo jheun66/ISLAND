@@ -5,6 +5,9 @@ class TerrainScene : public Scene
 private:
 	Terrain* terrain;
 
+	Cube* cube;
+
+	Water* water;
 public:
 	TerrainScene();
 	~TerrainScene();

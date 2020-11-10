@@ -8,8 +8,11 @@ struct PixelInput
 
 float4 main(PixelInput input) : SV_TARGET
 {
-    if (hasMap[0])
-        return diffuseMap.Sample(samp, input.uv);
-    else
-        return mDiffuse;
+    //if (hasMap[0])
+    //    return diffuseMap.Sample(samp, input.uv);
+    //else
+    //    return mDiffuse;
+    
+    // render2D에서 사용하려면
+    return diffuseMap.Sample(samp, input.uv);
 }

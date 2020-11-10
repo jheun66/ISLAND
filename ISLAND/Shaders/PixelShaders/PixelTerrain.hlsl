@@ -8,6 +8,8 @@ struct PixelInput
     float3 normal : NORMAL;
     float3 worldPos : POSITION0;
     float3 camPos : POSITION1;
+    
+    float clip : SV_ClipDistance0;
 };
 
 float4 main(PixelInput input) : SV_Target

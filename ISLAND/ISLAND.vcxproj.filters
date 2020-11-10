@@ -213,6 +213,9 @@
     <ClInclude Include="Program\Scene\ModelScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject\LandScape\LowPolyWater.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISLAND.cpp">
@@ -395,6 +398,9 @@
     <ClCompile Include="Program\Scene\ModelScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\LandScape\LowPolyWater.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ISLAND.rc">
@@ -436,6 +442,8 @@
     <FxCompile Include="Shaders\VertexShaders\VertexAnimation.hlsl" />
     <FxCompile Include="Shaders\VertexShaders\VertexRender.hlsl" />
     <FxCompile Include="Shaders\PixelShaders\PixelModel.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexLowPolyWater.hlsl" />
+    <FxCompile Include="Shaders\PixelShaders\PixelLowPolyWater.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\VertexShaders\VertexHeader.hlsli" />

@@ -43,3 +43,14 @@ struct VertexTerrain
 	{
 	}
 };
+
+
+struct VertexLowPolyWater
+{
+	Float3 position;
+	Float4 indicators;
+
+	VertexLowPolyWater() : position(0, 0, 0), indicators(0, 0, 0, 0)
+	{
+	}
+};

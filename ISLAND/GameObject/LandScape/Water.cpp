@@ -74,6 +74,8 @@ void Water::Render()
 
 void Water::PostRender()
 {
+	reflection->PostRender();
+
 	ImGui::Text("Water Option");
 	ImGui::ColorEdit4("Color", (float*)&buffer->data.color);
 	ImGui::SliderFloat("WaveScale", &buffer->data.waveScale, 0.0f, 10.0f);
@@ -81,6 +83,7 @@ void Water::PostRender()
 	ImGui::SliderFloat("Alpha", &buffer->data.alpha, 0.0f, 1.0f);
 	ImGui::SliderFloat("Shininess", &buffer->data.shininess, 0.0f, 50.0f);
 }
+
 
 void Water::CreateMesh()
 {

@@ -11,9 +11,13 @@ FreeCamera::~FreeCamera()
 
 void FreeCamera::Update()
 {
-	Move();
-	Rotation();
-
+	if (!isFixed)
+	{
+		Move();
+		Rotation();
+	}
+	else
+		Camera::Rotation();
 	View();
 }
 
@@ -26,9 +30,6 @@ void FreeCamera::PostRender()
 
 void FreeCamera::Move()
 {
-	if (isFixed)
-		return;
-
 	if (KEY_PRESS(VK_RBUTTON))
 	{
 		if (KEY_PRESS('W'))

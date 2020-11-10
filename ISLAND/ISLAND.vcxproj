@@ -152,6 +152,7 @@
     <ClInclude Include="Framework.h" />
     <ClInclude Include="GameObject\Basic\Cube.h" />
     <ClInclude Include="GameObject\Basic\Quad.h" />
+    <ClInclude Include="GameObject\LandScape\LowPolyWater.h" />
     <ClInclude Include="GameObject\LandScape\QuadTree.h" />
     <ClInclude Include="GameObject\LandScape\Scattering.h" />
     <ClInclude Include="GameObject\LandScape\Terrain.h" />
@@ -219,6 +220,7 @@
   <ItemGroup>
     <ClCompile Include="GameObject\Basic\Cube.cpp" />
     <ClCompile Include="GameObject\Basic\Quad.cpp" />
+    <ClCompile Include="GameObject\LandScape\LowPolyWater.cpp" />
     <ClCompile Include="GameObject\LandScape\QuadTree.cpp" />
     <ClCompile Include="GameObject\LandScape\Scattering.cpp" />
     <ClCompile Include="GameObject\LandScape\Terrain.cpp" />
@@ -302,6 +304,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
+    <FxCompile Include="Shaders\PixelShaders\PixelLowPolyWater.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
     <FxCompile Include="Shaders\PixelShaders\PixelModel.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -363,6 +371,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Shaders\VertexShaders\VertexColor.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Shaders\VertexShaders\VertexLowPolyWater.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

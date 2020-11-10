@@ -155,6 +155,7 @@ using namespace std;
 #include "GameObject/LandScape/QuadTree.h"
 #include "GameObject/LandScape/Water.h"
 #include "GameObject/LandScape/Scattering.h"
+#include "GameObject/LandScape/LowPolyWater.h"
 
 #include "GameObject/Model/ModelMesh.h"
 #include "GameObject/Model/ModelClip.h"
