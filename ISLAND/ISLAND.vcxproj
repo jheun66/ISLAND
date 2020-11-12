@@ -157,7 +157,6 @@
     <ClInclude Include="GameObject\LandScape\Scattering.h" />
     <ClInclude Include="GameObject\LandScape\Terrain.h" />
     <ClInclude Include="GameObject\LandScape\TerrainData.h" />
-    <ClInclude Include="GameObject\LandScape\Water.h" />
     <ClInclude Include="GameObject\Model\Model.h" />
     <ClInclude Include="GameObject\Model\ModelAnimator.h" />
     <ClInclude Include="GameObject\Model\ModelClip.h" />
@@ -185,6 +184,7 @@
     <ClInclude Include="MyFramework\System\Camera\FollowCamera.h" />
     <ClInclude Include="MyFramework\System\Camera\FreeCamera.h" />
     <ClInclude Include="MyFramework\System\Control\Control.h" />
+    <ClInclude Include="MyFramework\System\DepthMap\DepthMap.h" />
     <ClInclude Include="MyFramework\System\DepthStencil.h" />
     <ClInclude Include="MyFramework\System\Environment.h" />
     <ClInclude Include="MyFramework\System\Frustum\Frustum.h" />
@@ -225,7 +225,6 @@
     <ClCompile Include="GameObject\LandScape\Scattering.cpp" />
     <ClCompile Include="GameObject\LandScape\Terrain.cpp" />
     <ClCompile Include="GameObject\LandScape\TerrainData.cpp" />
-    <ClCompile Include="GameObject\LandScape\Water.cpp" />
     <ClCompile Include="GameObject\Model\Model.cpp" />
     <ClCompile Include="GameObject\Model\ModelAnimator.cpp" />
     <ClCompile Include="GameObject\Model\ModelClip.cpp" />
@@ -254,6 +253,7 @@
     <ClCompile Include="MyFramework\System\Camera\FollowCamera.cpp" />
     <ClCompile Include="MyFramework\System\Camera\FreeCamera.cpp" />
     <ClCompile Include="MyFramework\System\Control\Control.cpp" />
+    <ClCompile Include="MyFramework\System\DepthMap\DepthMap.cpp" />
     <ClCompile Include="MyFramework\System\DepthStencil.cpp" />
     <ClCompile Include="MyFramework\System\Environment.cpp" />
     <ClCompile Include="MyFramework\System\Frustum\Frustum.cpp" />
@@ -309,6 +309,7 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Shaders\PixelShaders\PixelModel.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -353,6 +354,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="Shaders\PixelShaders\PixelWater.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Shaders\PixelShaders\PixelWaterDepthMap.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -425,6 +432,12 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Shaders\VertexShaders\VertexWater.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Shaders\VertexShaders\VertexWaterDepthMap.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>

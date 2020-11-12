@@ -25,12 +25,12 @@ Terrain::Terrain(UINT width, UINT height)
 
 	material = new Material(L"Terrain");
 
-	UpdateWorld();
-
 	rs[0] = new RasterizerState();
 	rs[1] = new RasterizerState();
 	rs[1]->FillMode(D3D11_FILL_WIREFRAME);
+	UpdateWorld();
 
+	clippingPlane = new PlaneBuffer();
 }
 
 Terrain::~Terrain()
@@ -40,6 +40,8 @@ Terrain::~Terrain()
 
 	delete rs[0];
 	delete rs[1];
+
+	delete clippingPlane;
 }
 
 void Terrain::Render()
@@ -48,11 +50,12 @@ void Terrain::Render()
 	SetWorldBuffer();
 	material->Set();
 
-	if(viewWire)
+	clippingPlane->SetVSBuffer(10);
+
+	if (viewWire)
 		rs[1]->SetState();
 	DC->DrawIndexed(indices.size(), 0, 0);
 	rs[0]->SetState();
-
 }
 
 void Terrain::Update()
@@ -62,23 +65,26 @@ void Terrain::Update()
 
 void Terrain::PostRender()
 {
-	if (ImGui::Button("Load HeightMap", ImVec2(120, 40)))
-		LoadHeightMap(L"");
-
-	if (ImGui::Button("Save HeightMap", ImVec2(120, 40)))
-		SaveHeightMap(L"");
-
-	if (ImGui::Button("Generate Noise", ImVec2(120, 40)))
-		GenerateNoise();
-
-	if (ImGui::Button("Adjust Gradient", ImVec2(120, 40)))
-		AdjustGradient(L"");
-
-	if (ImGui::Button("View Wire", ImVec2(120, 40)))
+	ImGui::Begin("Terrain", 0, ImGuiWindowFlags_AlwaysAutoResize);
 	{
-		viewWire = !viewWire;
-	}
+		if (ImGui::Button("Load HeightMap", ImVec2(120, 40)))
+			LoadHeightMap(L"");
 
+		if (ImGui::Button("Save HeightMap", ImVec2(120, 40)))
+			SaveHeightMap(L"");
+
+		if (ImGui::Button("Generate Noise", ImVec2(120, 40)))
+			GenerateNoise();
+
+		if (ImGui::Button("Adjust Gradient", ImVec2(120, 40)))
+			AdjustGradient(L"");
+
+		if (ImGui::Button("View Wire", ImVec2(120, 40)))
+		{
+			viewWire = !viewWire;
+		}
+	}
+	ImGui::End();
 }
 
 void Terrain::SaveHeightMap(wstring path)
@@ -172,6 +178,11 @@ void Terrain::AdjustGradient(wstring path)
 
 		mesh->UpdateVertex(alignedVertices.data(), alignedVertices.size());
 	}
+}
+
+void Terrain::SetShader(wstring shader)
+{
+	material->SetShader(shader);
 }
 
 void Terrain::CreateColor()

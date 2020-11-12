@@ -6,7 +6,7 @@ private:
 	QuadTree* quadTree;
 	TerrainData* terrainData;
 
-	Water* water;
+	//Water* water;
 	Scattering* scattering;
 
 public:

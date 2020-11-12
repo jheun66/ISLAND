@@ -3,30 +3,47 @@
 class LowPolyWater : public Transform
 {
 private:
-	typedef VertexLowPolyWater VertexType;
-
-	class WaterBuffer : public ConstantBuffer
+	// 카메라의 nearfar 평면
+	class NearFarBuffer : public ConstantBuffer
 	{
 	public:
 		struct Data
 		{
-			Float4 color = Float4(0.2f, 0.3f, 1.0f, 1.0f);
-
-			float waveTranslation = 0.0f;
-			float waveScale = 0.05f;
-			float shininess = 0.0f;
-			float alpha = 0.5f;
-
-			float waveSpeed = 0.05f;
-			float padding[3] = {};
+			float nearPlane;
+			float farPlane;
+			float dummy[2];
 		}data;
 
-		WaterBuffer() : ConstantBuffer(&data, sizeof(Data))
+		NearFarBuffer() :ConstantBuffer(&data, sizeof(Data))
 		{
+			data.nearPlane = 0.1f;
+			data.farPlane = 1000.0f;
 		}
 	};
 
-	WaterBuffer* buffer;
+	class WaterOptionBuffer : public ConstantBuffer
+	{
+	public:
+		struct Data
+		{
+			float waterHeight;
+			float waveLength;
+			float waveAmplitude;
+			float dummy;
+		}data;
+
+		WaterOptionBuffer() :ConstantBuffer(&data, sizeof(Data))
+		{
+			data.waterHeight = 5.0f;
+			data.waveLength = 4.0f;
+			data.waveAmplitude = 0.2f;
+		}
+	};
+
+	// 물깊이 수정하게하기 위해 
+	friend class TerrainScene;
+
+	typedef VertexLowPolyWater VertexType;
 
 	Material* material;
 	Mesh* mesh;
@@ -38,10 +55,17 @@ private:
 	Reflection* reflection;
 	Refraction* refraction;
 
-	TimeBuffer* timeBuffer;
+	float reflectionOffset = -0.1f;
+	float refractionOffset = -3.0f;
 
-	RasterizerState* rasterizerState[2];
-	BlendState* blendState[2];
+	DepthMap* depthMap;
+
+	RasterizerState* rs[2];
+	bool viewWire = false;
+
+	NearFarBuffer* nearFarBuffer;
+	WaterOptionBuffer* waterOption;
+	TimeBuffer* timeBuffer;
 
 	float width;
 	float height;
@@ -52,6 +76,7 @@ public:
 
 	void Update();
 
+	void SetDepthMap();
 	void SetReflection();
 	void SetRefraction();
 	void Render();

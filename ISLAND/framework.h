@@ -142,6 +142,7 @@ using namespace std;
 
 #include "MyFramework/System/Reflection/Reflection.h"
 #include "MyFramework/System/Refraction/Refraction.h"
+#include "MyFramework/System/DepthMap/DepthMap.h"
 
 #include "MyFramework/Assimp/ModelTypes.h"
 #include "MyFramework/Assimp/ModelReader.h"
@@ -153,7 +154,6 @@ using namespace std;
 #include "GameObject/LandScape/Terrain.h"
 #include "GameObject/LandScape/TerrainData.h"
 #include "GameObject/LandScape/QuadTree.h"
-#include "GameObject/LandScape/Water.h"
 #include "GameObject/LandScape/Scattering.h"
 #include "GameObject/LandScape/LowPolyWater.h"
 

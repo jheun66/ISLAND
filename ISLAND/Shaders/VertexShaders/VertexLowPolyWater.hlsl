@@ -2,21 +2,21 @@
 
 const static float PI = 3.1415926535897932384626433832795;
 
-const static float waveLength = 4.0;
-const static float waveAmplitude = 0.2;
-
-
-cbuffer Reflection : register(b10)
+cbuffer WaterOptionBuffer : register(b11)
 {
-    matrix reflection;
+    float waterHeight;
+    float waveLength;
+    float waveAmplitude;
 }
+
+//const static float waveLength = 4.0;
+//const static float waveAmplitude = 0.2;
 
 struct VertexInput
 {
     float4 pos : Position;
     float4 indicator : Indicator;
 };
-
 
 struct PixelInput
 {
@@ -31,13 +31,18 @@ float3 CalcNormal(float3 vertex0, float3 vertex1, float3 vertex2)
 {
     float3 tangent = vertex1 - vertex0;
     float3 bitangent = vertex2 - vertex0;
-    return normalize(cross(tangent, bitangent));
+    return normalize(cross(bitangent, tangent));
+}
+
+float Mod(float x, float y)
+{
+    return x - y * floor(x / y);
 }
 
 float generateOffset(float x, float z, float val1, float val2)
 {
-    float radiansX = ((modf(x + z * x * val1, waveLength) / waveLength) + time * modf(x * 0.8 + z, 1.5)) * 2.0 * PI;
-    float radiansZ = ((modf(val2 * (z * x + x * z), waveLength) / waveLength) + time * 2.0 * modf(x, 2.0)) * 2.0 * PI;
+    float radiansX = ((Mod(x + z * x * val1, waveLength) / waveLength) + time * Mod(x * 0.8 + z, 1.5)) * 2.0 * PI;
+    float radiansZ = ((Mod(val2 * (z * x + x * z), waveLength) / waveLength) + time * 2.0 * Mod(x, 2.0)) * 2.0 * PI;
     return waveAmplitude * 0.5 * (sin(radiansZ) + cos(radiansX));
 }
 
@@ -53,11 +58,12 @@ PixelInput main(VertexInput input)
 {
     PixelInput output;
     
-    float3 currentVertex = float3(input.pos.x, 0.0f, input.pos.z);
-    float3 vertex1 = currentVertex + float3(input.indicator.x, 0.0f, input.indicator.y);
-    float3 vertex2 = currentVertex + float3(input.indicator.z, 0.0f, input.indicator.w);
+    float3 currentVertex = float3(input.pos.x, waterHeight, input.pos.z);
+    float3 vertex1 = currentVertex + float3(input.indicator.y, 0.0f, input.indicator.x);
+    float3 vertex2 = currentVertex + float3(input.indicator.w, 0.0f, input.indicator.z);
     
-    output.wClipSpaceGrid = mul(float4(currentVertex, 1.0f), mul(view, projection));
+    output.wClipSpaceGrid = mul(float4(currentVertex, 1.0f), view);
+    output.wClipSpaceGrid = mul(output.wClipSpaceGrid, projection);
     
     currentVertex = ApplyDistortion(currentVertex);
     vertex1 = ApplyDistortion(vertex1);
@@ -65,7 +71,8 @@ PixelInput main(VertexInput input)
     
     output.normal = CalcNormal(currentVertex, vertex1, vertex2);
     
-    output.wClipSpaceReal = mul(float4(currentVertex, 1.0f), mul(view, projection));
+    output.wClipSpaceReal = mul(float4(currentVertex, 1.0f), view);
+    output.wClipSpaceReal = mul(output.wClipSpaceReal, projection);
     
     output.clipSpaceReal = output.wClipSpaceReal;
     

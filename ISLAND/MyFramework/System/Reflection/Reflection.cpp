@@ -15,7 +15,7 @@ Reflection::Reflection(Transform* transform)
 	targetTexture->SetSRV(renderTarget->GetSRV());
 	// 균등 스케일이 연산이 더 빠름
 	targetTexture->scale = { 300, 300, 300 };
-	targetTexture->position = { 150, 150, 0 };
+	targetTexture->position = { 750, 150, 0 };
 }
 
 Reflection::~Reflection()

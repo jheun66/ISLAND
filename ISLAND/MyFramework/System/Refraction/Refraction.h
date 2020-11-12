@@ -3,17 +3,13 @@
 class Refraction
 {
 private:
-	TimeBuffer* timeBuffer;
-
-	Texture* normalMap;
-
 	RenderTarget* renderTarget;
 	DepthStencil* depthStencil;
 
 	class Render2D* targetTexture;
 
 public:
-	Refraction(wstring normalFile);
+	Refraction();
 	~Refraction();
 
 	void Update();

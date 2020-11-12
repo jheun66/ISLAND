@@ -1,28 +1,25 @@
 #include "Framework.h"
 
-LowPolyWater::LowPolyWater(float width, float hieght)
+LowPolyWater::LowPolyWater(float width, float height)
 	:width(width), height(height)
 {
 	material = new Material(L"LowPolyWater");
 
-	buffer = new WaterBuffer();
-
 	reflection = new Reflection(this);
-	refraction = new Refraction(L"Textures/Wave.dds");
+	refraction = new Refraction();
+	depthMap = new DepthMap();
 
 	CreateMesh();
 	mesh = new Mesh(alignedVertices.data(), sizeof(VertexType), alignedVertices.size(),
 		indices.data(), indices.size());
 
+	nearFarBuffer = new NearFarBuffer();
+	waterOption = new WaterOptionBuffer();
 	timeBuffer = new TimeBuffer();
 
-	blendState[0] = new BlendState();
-	blendState[1] = new BlendState();
-	blendState[1]->Alpha(true);
-
-	rasterizerState[0] = new RasterizerState();
-	rasterizerState[1] = new RasterizerState();
-	rasterizerState[0]->FillMode(D3D11_FILL_WIREFRAME);
+	rs[0] = new RasterizerState();
+	rs[1] = new RasterizerState();
+	rs[1]->FillMode(D3D11_FILL_WIREFRAME);
 }
 
 LowPolyWater::~LowPolyWater()
@@ -30,32 +27,32 @@ LowPolyWater::~LowPolyWater()
 	delete material;
 	delete mesh;
 
-	delete buffer;
-
 	delete reflection;
 	delete refraction;
+	delete depthMap;
 
+	delete nearFarBuffer;
+	delete waterOption;
 	delete timeBuffer;
 
-	delete blendState[0];
-	delete blendState[1];
-
-	delete rasterizerState[0];
-	delete rasterizerState[1];
+	delete rs[0];
+	delete rs[1];
 }
 
 void LowPolyWater::Update()
 {
 	timeBuffer->data.time += DELTA;
 
-	buffer->data.waveTranslation += buffer->data.waveSpeed * DELTA;
-	if (buffer->data.waveTranslation > 1.0f)
-		buffer->data.waveTranslation -= 1.0f;
-
 	reflection->Update();
 	refraction->Update();
+	depthMap->Update();
 
 	UpdateWorld();
+}
+
+void LowPolyWater::SetDepthMap()
+{
+	depthMap->PreRender();
 }
 
 void LowPolyWater::SetReflection()
@@ -75,28 +72,44 @@ void LowPolyWater::Render()
 	SetWorldBuffer();
 
 	timeBuffer->SetVSBuffer(9);
-	buffer->SetPSBuffer(10);
+	waterOption->SetVSBuffer(11);
+	nearFarBuffer->SetPSBuffer(10);
 
 	reflection->Render();
 	refraction->Render();
+	depthMap->Render();
 
 	material->Set();
 
-	rasterizerState[1]->SetState();
-	blendState[1]->SetState();
+	if (viewWire)
+		rs[1]->SetState();
 	DC->DrawIndexed(indices.size(), 0, 0);
-	blendState[0]->SetState();
-	rasterizerState[0]->SetState();
+	rs[0]->SetState();
 }
 
 void LowPolyWater::PostRender()
 {
-	ImGui::Text("Water Option");
-	ImGui::ColorEdit4("Color", (float*)&buffer->data.color);
-	ImGui::SliderFloat("WaveScale", &buffer->data.waveScale, 0.0f, 10.0f);
-	ImGui::SliderFloat("WaveSpeed", &buffer->data.waveSpeed, 0.0f, 1.0f);
-	ImGui::SliderFloat("Alpha", &buffer->data.alpha, 0.0f, 1.0f);
-	ImGui::SliderFloat("Shininess", &buffer->data.shininess, 0.0f, 50.0f);
+	//depthMap->PostRender();
+	//refraction->PostRender();
+	//reflection->PostRender();
+	ImGui::Begin("Water", 0, ImGuiWindowFlags_AlwaysAutoResize);
+	{
+		ImGui::SliderFloat("Water Height", &waterOption->data.waterHeight, -1.0f, 40.0f);
+		ImGui::SliderFloat("Wave Length", &waterOption->data.waveLength, 1.0f, 10.0f);
+		ImGui::SliderFloat("Wave Amplitude", &waterOption->data.waveAmplitude, 0.0f, 1.0f);
+
+		ImGui::SliderFloat("Reflection Offset", &reflectionOffset, -50.0f, 50.0f);
+		ImGui::SliderFloat("Refraction Offset", &refractionOffset, -50.0f, 50.0f);
+
+		if (ImGui::Button("View Wire", ImVec2(120, 40)))
+		{
+			viewWire = !viewWire;
+		}
+
+		//ImGui::SliderFloat("Near Plane", &nearFarBuffer->data.nearPlane, -1.0f, 10.0f);
+		//ImGui::SliderFloat("Far Plane", &nearFarBuffer->data.farPlane, 100.0f, 1100.0f);
+	}
+	ImGui::End();
 }
 
 void LowPolyWater::CreateMesh()
@@ -106,7 +119,7 @@ void LowPolyWater::CreateMesh()
 	{
 		for (UINT j = 0; j < width; j++)
 		{
-			vertices[i * height + j].position = { (float)i, 0.0f, (float)j };
+			vertices[i * width + j].position = { (float)j, 0.0f, (float)i };
 		}
 	}
 
@@ -115,8 +128,8 @@ void LowPolyWater::CreateMesh()
 	{
 		for (UINT x = 0; x < width - 1; x++)
 		{
-			VertexType four[4] = { vertices[width * z + x],vertices[width * (z + 1) + x],
-			vertices[width * z + x + 1],vertices[width * (z + 1) + x + 1] };
+			VertexType four[4] = { vertices[width * z + x], vertices[width * (z + 1) + x],
+			vertices[width * z + x + 1], vertices[width * (z + 1) + x + 1] };
 
 			if (!((x % 2) ^ (z % 2)))
 			{
@@ -152,8 +165,8 @@ VertexLowPolyWater LowPolyWater::CalcIndicators(VertexType* four, UINT curVertex
 	VertexType vertex;
 	vertex.position = four[curVertex].position;
 	vertex.indicators.x = four[vertex1].position.x - vertex.position.x;
-	vertex.indicators.y = four[vertex1].position.y - vertex.position.y;
+	vertex.indicators.y = four[vertex1].position.z - vertex.position.z;
 	vertex.indicators.z = four[vertex2].position.x - vertex.position.x;
-	vertex.indicators.w = four[vertex2].position.y - vertex.position.y;
+	vertex.indicators.w = four[vertex2].position.z - vertex.position.z;
 	return vertex;
 }

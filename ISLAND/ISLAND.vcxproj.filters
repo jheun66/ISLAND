@@ -168,9 +168,6 @@
     <ClInclude Include="MyFramework\System\Refraction\Refraction.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject\LandScape\Water.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="MyFramework\System\RenderTarget.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -214,6 +211,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameObject\LandScape\LowPolyWater.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFramework\System\DepthMap\DepthMap.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -356,9 +356,6 @@
     <ClCompile Include="MyFramework\System\Refraction\Refraction.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject\LandScape\Water.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="MyFramework\System\RenderTarget.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -399,6 +396,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameObject\LandScape\LowPolyWater.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFramework\System\DepthMap\DepthMap.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -444,6 +444,8 @@
     <FxCompile Include="Shaders\PixelShaders\PixelModel.hlsl" />
     <FxCompile Include="Shaders\VertexShaders\VertexLowPolyWater.hlsl" />
     <FxCompile Include="Shaders\PixelShaders\PixelLowPolyWater.hlsl" />
+    <FxCompile Include="Shaders\VertexShaders\VertexWaterDepthMap.hlsl" />
+    <FxCompile Include="Shaders\PixelShaders\PixelWaterDepthMap.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\VertexShaders\VertexHeader.hlsli" />

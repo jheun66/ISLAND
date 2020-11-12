@@ -5,12 +5,33 @@ class Terrain : public Transform
 private:
 	typedef VertexTerrain VertexType;
 
+	class PlaneBuffer : public ConstantBuffer
+	{
+	private:
+		struct Data
+		{
+			Float4 plane;
+		}data;
+
+	public:
+		PlaneBuffer() : ConstantBuffer(&data, sizeof(Data))
+		{
+			data.plane = { 0, 0, 0, 0 };
+		}
+
+		void Set(Float4 value)
+		{
+			data.plane = value;
+		}
+	};
+
 	Mesh* mesh = nullptr;
 	Material* material = nullptr;
 
 	Texture* heightMap = nullptr;
 	Texture* gradientMap = nullptr;
 
+	RasterizerState* rs[2];
 	bool viewWire = false;
 
 	// 2차원
@@ -21,8 +42,6 @@ private:
 	vector<UINT> indices;
 	vector<VertexType> alignedVertices;
 
-	RasterizerState* rs[2];
-
 	// 노이즈 저장
 	vector<vector<float>> noise; 
 
@@ -32,6 +51,8 @@ private:
 	float part;
 
 	float maxH;
+
+	PlaneBuffer* clippingPlane;
 public:
 	Terrain(UINT width, UINT hegiht);
 	~Terrain();
@@ -44,6 +65,8 @@ public:
 	void LoadHeightMap(wstring path);
 	void AdjustGradient(wstring path);
 
+	void SetShader(wstring shader);
+	void SetClippingPlane(Float4 plane) { clippingPlane->Set(plane); }
 
 private:
 	void CreateTerrain();
@@ -57,6 +80,5 @@ private:
 	void GenerateNoise();
 	float SmoothNoise(float x, float y);
 	float Turbulence(float x, float y, float size);
-
 
 };

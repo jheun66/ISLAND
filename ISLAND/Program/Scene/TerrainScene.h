@@ -7,7 +7,8 @@ private:
 
 	Cube* cube;
 
-	Water* water;
+	LowPolyWater* water;
+
 public:
 	TerrainScene();
 	~TerrainScene();

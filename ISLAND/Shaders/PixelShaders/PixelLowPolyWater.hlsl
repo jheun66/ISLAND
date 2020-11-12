@@ -89,8 +89,8 @@ float4 main(PixelInput input) : SV_Target
     float2 texCoordsReal = ClipSpaceToTexCoords(input.wClipSpaceReal);
     float2 texCoordsGrid = ClipSpaceToTexCoords(input.wClipSpaceGrid);
 	
-    float2 refractionTexCoords = texCoordsGrid;
-    float2 reflectionTexCoords = float2(texCoordsGrid.x, 1.0 - texCoordsGrid.y);
+    float2 reflectionTexCoords = texCoordsGrid;
+    float2 refractionTexCoords = float2(texCoordsGrid.x, 1.0f - texCoordsGrid.y);
     float waterDepth = CalculateWaterDepth(texCoordsReal, input.clipSpaceReal);
 	
     float3 refractColor = refractionMap.Sample(samp, refractionTexCoords).rgb;
