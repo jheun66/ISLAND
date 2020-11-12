@@ -3,7 +3,7 @@
 class Reflection
 {
 private:
-	Transform* transform;
+	float waterHeight = 0.0f;
 
 	FreeCamera* camera;
 
@@ -15,7 +15,7 @@ private:
 	class Render2D* targetTexture;
 
 public:
-	Reflection(Transform* transform);
+	Reflection();
 	~Reflection();
 
 	void Update();
@@ -23,4 +23,6 @@ public:
 	void PreRender();
 	void Render();
 	void PostRender();
+
+	void SetWaterHeight(float height) { waterHeight = height; }
 };

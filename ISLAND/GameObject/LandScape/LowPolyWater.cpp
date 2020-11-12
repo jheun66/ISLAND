@@ -5,7 +5,7 @@ LowPolyWater::LowPolyWater(float width, float height)
 {
 	material = new Material(L"LowPolyWater");
 
-	reflection = new Reflection(this);
+	reflection = new Reflection();
 	refraction = new Refraction();
 	depthMap = new DepthMap();
 
@@ -15,6 +15,8 @@ LowPolyWater::LowPolyWater(float width, float height)
 
 	nearFarBuffer = new NearFarBuffer();
 	waterOption = new WaterOptionBuffer();
+	reflection->SetWaterHeight(waterOption->data.waterHeight);
+
 	timeBuffer = new TimeBuffer();
 
 	rs[0] = new RasterizerState();
@@ -43,6 +45,7 @@ void LowPolyWater::Update()
 {
 	timeBuffer->data.time += DELTA;
 
+	reflection->SetWaterHeight(waterOption->data.waterHeight);
 	reflection->Update();
 	refraction->Update();
 	depthMap->Update();
@@ -98,7 +101,7 @@ void LowPolyWater::PostRender()
 		ImGui::SliderFloat("Wave Length", &waterOption->data.waveLength, 1.0f, 10.0f);
 		ImGui::SliderFloat("Wave Amplitude", &waterOption->data.waveAmplitude, 0.0f, 1.0f);
 
-		ImGui::SliderFloat("Reflection Offset", &reflectionOffset, -50.0f, 50.0f);
+		ImGui::SliderFloat("Reflection Offset", &reflectionOffset, -40.0f, 0.0f);
 		ImGui::SliderFloat("Refraction Offset", &refractionOffset, -50.0f, 50.0f);
 
 		if (ImGui::Button("View Wire", ImVec2(120, 40)))

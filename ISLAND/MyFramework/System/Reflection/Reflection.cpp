@@ -1,7 +1,6 @@
 #include "Framework.h"
 
-Reflection::Reflection(Transform* transform)
-	: transform(transform)
+Reflection::Reflection()
 {
 	renderTarget = new RenderTarget();
 	depthStencil = new DepthStencil();
@@ -40,7 +39,7 @@ void Reflection::Update()
 
 	camera->SetRotation(rot);
 
-	pos.y = transform->position.y * 2.0f - pos.y;
+	pos.y = waterHeight * 2.0f - pos.y;
 
 	camera->SetPosition(pos);
 
